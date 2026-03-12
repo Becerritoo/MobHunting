@@ -105,13 +105,13 @@ public class TARDISWeepingAngelsCompat implements Listener {
 	public static void loadTARDISWeepingAngelsMobsData() {
 		try {
 			if (!file.exists()) {
-				for (Monster monster : Monster.getValues()) {
+				for (Monster monster : Monster.values()) {
 					mMobRewardData.put(monster.name(),
 							new ExtendedMobRewardData(MobPlugin.TARDISWeepingAngels, monster.name(), monster.getName(),
 									true, "40:60", 1, "You killed a TRADIS Mob",
 									new ArrayList<HashMap<String, String>>(), 1, 0.02));
 					saveTARDISWeepingAngelsMobsData(mMobRewardData.get(monster.name()).getMobType());
-					MobHunting.getInstance().getStoreManager().insertTARDISWeepingAngelsMobs(monster.name);
+					MobHunting.getInstance().getStoreManager().insertTARDISWeepingAngelsMobs(monster.name());
 				}
 				return;
 			}
@@ -211,7 +211,7 @@ public class TARDISWeepingAngelsCompat implements Listener {
 								true, "40:60", 1, "You killed a TARDIS Mob", new ArrayList<HashMap<String, String>>(),
 								1, 0.02));
 				saveTARDISWeepingAngelsMobsData(monster.name());
-				MobHunting.getInstance().getStoreManager().insertTARDISWeepingAngelsMobs(monster.name);
+				MobHunting.getInstance().getStoreManager().insertTARDISWeepingAngelsMobs(monster.name());
 				// Update mob loaded into memory
 				MobHunting.getInstance().getExtendedMobManager().updateExtendedMobs();
 				MobHunting.getInstance().getMessages().injectMissingMobNamesToLangFiles();

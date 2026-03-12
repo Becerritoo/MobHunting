@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import io.hotmail.com.jacob_vejvoda.infernal_mobs.infernal_mobs;
+import io.hotmail.com.jacob_vejvoda.infernalmobs.InfernalMobsPlugin;
 import one.lindegaard.CustomItemsLib.compatibility.CompatPlugin;
 import one.lindegaard.CustomItemsLib.mobs.MobType;
 import one.lindegaard.MobHunting.MobHunting;
@@ -23,7 +23,7 @@ public class InfernalMobsCompat implements Listener {
 	private static boolean supported = false;
 	private static Plugin mPlugin;
 	private static HashMap<String, Double> mMobRewardData = new HashMap<String, Double>();
-	private static infernal_mobs api;
+	private static InfernalMobsPlugin api;
 	public static final String MH_INFERNALMOBS = "MH:INFERNALMOBS";
 
 	public InfernalMobsCompat() {
@@ -38,7 +38,7 @@ public class InfernalMobsCompat implements Listener {
 			Bukkit.getConsoleSender().sendMessage(MobHunting.PREFIX + "Enabling Compatibility with InfernalMobs ("
 					+ getInfernalMobs().getDescription().getVersion() + ")");
 
-			api = (infernal_mobs) mPlugin;
+			api = (InfernalMobsPlugin) mPlugin;
 
 			loadInfernalMobsData();
 
@@ -51,8 +51,8 @@ public class InfernalMobsCompat implements Listener {
 	// **************************************************************************
 	// OTHER FUNCTIONS
 	// **************************************************************************
-	public static infernal_mobs getInfernalMobs() {
-		return (infernal_mobs) mPlugin;
+	public static InfernalMobsPlugin getInfernalMobs() {
+		return (InfernalMobsPlugin) mPlugin;
 	}
 
 	public static boolean isSupported() {

@@ -126,23 +126,14 @@ public class RewardManager {
 
 	private MobHunting plugin;
 
-	private PickupRewards pickupRewards;
-
 	public RewardManager(MobHunting plugin) {
 		this.plugin = plugin;
 		if (!BagOfGoldCompat.isSupported()) {
 
-			pickupRewards = new PickupRewards(plugin);
-
 			Bukkit.getPluginManager().registerEvents(new RewardListeners(plugin), plugin);
-			
+
 			if (!BagOfGoldCompat.isSupported())
 				Bukkit.getPluginManager().registerEvents(new MoneyMergeEventListener(plugin), plugin);
-			
-			if (Servers.isMC112OrNewer() && eventDoesExists())
-				Bukkit.getPluginManager().registerEvents(new EntityPickupItemEventListener(pickupRewards), plugin);
-			else
-				Bukkit.getPluginManager().registerEvents(new PlayerPickupItemEventListener(pickupRewards), plugin);
 
 		}
 		if (BagOfGoldCompat.isSupported() || plugin.getConfigManager().dropMoneyOnGroundUseItemAsCurrency)

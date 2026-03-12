@@ -22,7 +22,7 @@ import com.sainttx.holograms.api.line.TextualHologramLine;
 import one.lindegaard.CustomItemsLib.storage.IDataCallback;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.StatType;
-import one.lindegaard.MobHunting.compatibility.CMICompat;
+import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.MobHunting.compatibility.CMIHologramsHelper;
 import one.lindegaard.MobHunting.compatibility.HologramsCompat;
 import one.lindegaard.MobHunting.compatibility.HologramsHelper;
@@ -150,7 +150,7 @@ public class HologramLeaderboard implements IDataCallback<List<StatStore>> {
 						HologramsHelper.editTextLine(hologram, String.format(mRow_format_integer, n + 1,
 								mData.get(n).getPlayer().getName(), mData.get(n).getAmount()), n + 1);
 				}
-				hologram.setDirty(true);
+	
 			}
 
 		} else if (HolographicDisplaysCompat.isSupported()) {

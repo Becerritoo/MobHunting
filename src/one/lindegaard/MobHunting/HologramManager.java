@@ -15,7 +15,7 @@ import com.Zrips.CMI.Modules.Holograms.CMIHologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.sainttx.holograms.api.Hologram;
 
-import one.lindegaard.MobHunting.compatibility.CMICompat;
+import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.MobHunting.compatibility.CMIHologramsHelper;
 import one.lindegaard.MobHunting.compatibility.HologramsCompat;
 import one.lindegaard.MobHunting.compatibility.HologramsHelper;

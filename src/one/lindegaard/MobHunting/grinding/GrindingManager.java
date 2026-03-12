@@ -743,7 +743,7 @@ public class GrindingManager implements Listener {
 			for (int n = 0; n < 5; n++) {
 				if (player != null & player.isOnline()) {
 					double y = killedLocation.clone().getBlockY() + 0.2 + 0.4 * n;
-					player.spawnParticle(Particle.SMOKE_NORMAL, killedLocation.getX(), y, killedLocation.getZ(), 5);
+					player.spawnParticle(Particle.SMOKE, killedLocation.getX(), y, killedLocation.getZ(), 5);
 					if (grindingArea != null) {
 						double y2 = grindingArea.getCenter().clone().getBlockY() + 0.2 + n * 0.4;
 						player.spawnParticle(Particle.HEART, grindingArea.getCenter().getX(), y2,

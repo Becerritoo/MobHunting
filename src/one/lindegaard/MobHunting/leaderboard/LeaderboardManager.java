@@ -42,7 +42,7 @@ import one.lindegaard.CustomItemsLib.materials.Materials;
 import one.lindegaard.MobHunting.HologramManager;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.StatType;
-import one.lindegaard.MobHunting.compatibility.CMICompat;
+import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.MobHunting.compatibility.HologramsCompat;
 import one.lindegaard.MobHunting.compatibility.HolographicDisplaysCompat;
 import one.lindegaard.MobHunting.storage.StatStore;

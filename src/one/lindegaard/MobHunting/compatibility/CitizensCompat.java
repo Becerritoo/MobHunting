@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.CitizensPlugin;
-import net.citizensnpcs.api.event.CitizensDisableEvent;
 import net.citizensnpcs.api.event.CitizensEnableEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -31,6 +30,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class CitizensCompat implements Listener {
@@ -288,10 +288,11 @@ public class CitizensCompat implements Listener {
 		saveCitizensData();
 	}
 
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	private void onCitizensDisableEvent(CitizensDisableEvent event) {
-		// MobHunting.getInstance().getMessages().debug("CitizensDisableEvent -
-		// saving");
+	@EventHandler(priority = EventPriority.MONITOR)
+	private void onPluginDisableEvent(PluginDisableEvent event) {
+		if (event.getPlugin().getName().equals(CompatPlugin.Citizens.getName())) {
+			// Citizens2 was disabled
+		}
 	}
 
 }

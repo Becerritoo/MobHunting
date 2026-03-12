@@ -2209,7 +2209,7 @@ public class MobHuntingManager implements Listener {
 			plugin.getParticleManager().attachEffect(event.getEntity(), Effect.MOBSPAWNER_FLAMES);
 			if (plugin.mRand.nextBoolean())
 				event.getEntity()
-						.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 3));
+						.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, Integer.MAX_VALUE, 3));
 			else
 				event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
 			event.getEntity().setMetadata("MH:hasBonus", new FixedMetadataValue(plugin, true));

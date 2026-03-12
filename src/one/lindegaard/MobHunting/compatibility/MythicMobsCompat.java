@@ -57,12 +57,6 @@ public class MythicMobsCompat {
 				supported = true;
 				Bukkit.getPluginManager().registerEvents(new MythicMobsV400Compat(), MobHunting.getInstance());
 
-			} else if (mPlugin.getDescription().getVersion().compareTo("2.5.1") >= 0) {
-				Bukkit.getConsoleSender().sendMessage(MobHunting.PREFIX + "Enabling compatibility with MythicMobs ("
-						+ mPlugin.getDescription().getVersion() + ")");
-				mmVersion = MythicMobVersion.MYTHICMOBS_V251;
-				supported = true;
-				Bukkit.getPluginManager().registerEvents(new MythicMobsV251Compat(), MobHunting.getInstance());
 
 			} else {
 				ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
@@ -97,8 +91,6 @@ public class MythicMobsCompat {
 
 	public static boolean isMythicMob(String mob) {
 		switch (mmVersion) {
-		case MYTHICMOBS_V251:
-			return MythicMobsV251Compat.isMythicMobV251(mob);
 		case MYTHICMOBS_V400:
 			return MythicMobsV400Compat.isMythicMobV400(mob);
 		case MYTHICMOBS_V500:
@@ -113,8 +105,6 @@ public class MythicMobsCompat {
 
 	public static String getMythicMobName(String mob) {
 		switch (mmVersion) {
-		case MYTHICMOBS_V251:
-			return MythicMobsV251Compat.getMythicMobV251(mob).getInternalName();
 		case MYTHICMOBS_V400:
 			return MythicMobsV400Compat.getMythicMobV400(mob).getInternalName();
 		case MYTHICMOBS_V500:

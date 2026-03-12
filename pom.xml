@@ -18,7 +18,7 @@
 	</parent>
 
 	<properties>
-		<bagofgold.version>4.5.7-SNAPSHOT</bagofgold.version>
+		<bagofgold.version>4.5.6-SNAPSHOT</bagofgold.version>
 
 		<minigameslib.version>1.14.16</minigameslib.version>
 		<minigames.version>	1.11.0</minigames.version>
@@ -99,6 +99,17 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*DELETED.java</exclude>
+						<exclude>**/*Deleted.java</exclude>
+						<exclude>**/MythicMobsV251Compat.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>${mavenShadePlugin.version}</version>
 				<executions>
@@ -164,6 +175,12 @@
 			<groupId>net.tnemc</groupId>
 			<artifactId>Reserve</artifactId>
 			<version>${reserve.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Citizens -->
@@ -190,6 +207,10 @@
 					<artifactId>metrics-lite</artifactId>
 					<groupId>org.mcstats.bukkit</groupId>
 				</exclusion>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -198,14 +219,26 @@
 			<groupId>me.confuser</groupId>
 			<artifactId>BarAPI</artifactId>
 			<version>${barapi.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- TitleManager -->
-		
+
 		<dependency>
 			<groupId>io.puharesource.mc.titlemanager</groupId>
 			<artifactId>TitleManager</artifactId>
 			<version>${titlemanager.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- TitleAPI, ActionBarAPI -->
@@ -213,6 +246,12 @@
 			<groupId>com.github.ConnorLinfoot</groupId>
 			<artifactId>TitleAPI</artifactId>
 			<version>${TitleAPI.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- EssentialsX -->
@@ -228,6 +267,12 @@
 			<groupId>com.github.ConnorLinfoot</groupId>
 			<artifactId>ActionBarAPI</artifactId>
 			<version>${ActionBarAPI.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- ActionAnnouncer -->
@@ -235,6 +280,12 @@
 			<groupId>me.clip.actionannouncer</groupId>
 			<artifactId>ActionAnnouncer</artifactId>
 			<version>${ActionAnnouncer.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- bStats.org -->
@@ -258,6 +309,12 @@
 			<groupId>org.black_ixx</groupId>
 			<artifactId>BossShop</artifactId>
 			<version>${bossshop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- SpigetUpdate -->
@@ -280,6 +337,12 @@
 			<groupId>org.gestern.gringotts</groupId>
 			<artifactId>Gringotts</artifactId>
 			<version>${gringotts.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- WorldEdit -->
@@ -287,6 +350,12 @@
 			<groupId>com.sk89q.worldedit</groupId>
 			<artifactId>worldedit-bukkit</artifactId>
 			<version>${worldedit.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 
@@ -320,6 +389,12 @@
 			<groupId>de.keyle</groupId>
 			<artifactId>mypet</artifactId>
 			<version>${mypet.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- McMMOHorses -->
@@ -327,6 +402,12 @@
 			<groupId>com.blueskullgames.horserpg</groupId>
 			<artifactId>mcMMOHorse</artifactId>
 			<version>${mcmmohorses.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Worldguard -->
@@ -342,6 +423,12 @@
 			<groupId>net.sacredlabyrinth.Phaed</groupId>
 			<artifactId>PreciousStones</artifactId>
 			<version>${PreciousStones.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- BattleArena -->
@@ -349,6 +436,12 @@
 			<groupId>mc.alk.arena</groupId>
 			<artifactId>BattleArena</artifactId>
 			<version>${battleArena.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- TARDISWeepingangels -->
@@ -356,6 +449,12 @@
 			<groupId>me.eccentric_nz.tardisweepingangels</groupId>
 			<artifactId>TARDISWeepingAngels</artifactId>
 			<version>${TARDISWeepingAngels.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- ConquestiaMobs -->
@@ -371,6 +470,12 @@
 			<groupId>me.lorinth.rpgmobs</groupId>
 			<artifactId>LorinthsRpgMobs</artifactId>
 			<version>${LorinthsRpgMobs.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- LevelledMobs -->
@@ -378,6 +483,12 @@
 			<groupId>me.lokka30.levelledmobs</groupId>
 			<artifactId>LevelledMobs</artifactId>
 			<version>${LevelledMobs.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- StackMob -->
@@ -385,6 +496,12 @@
 			<groupId>uk.antiperson.stackmob</groupId>
 			<artifactId>StackMob</artifactId>
 			<version>${StackMob.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MysteriousHalloween -->
@@ -392,6 +509,12 @@
 			<groupId>me.F_o_F_1092.MysteriousHalloween</groupId>
 			<artifactId>MysteriousHalloween</artifactId>
 			<version>${MysteriousHalloween.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- EliteMobs -->
@@ -399,6 +522,12 @@
 			<groupId>com.magmaguy</groupId>
 			<artifactId>EliteMobs</artifactId>
 			<version>${EliteMobs.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- SmartGiants -->
@@ -414,6 +543,12 @@
 			<groupId>net.theprogrammersworld.herobrine.Herobrine</groupId>
 			<artifactId>Herobrine</artifactId>
 			<version>${Herobrine.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Boss -->
@@ -421,6 +556,12 @@
 			<groupId>org.mineacademy.boss</groupId>
 			<artifactId>Boss</artifactId>
 			<version>${boss.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- iDisguise -->
@@ -428,6 +569,12 @@
 			<groupId>de.robingrether.idisguise</groupId>
 			<artifactId>iDisguise</artifactId>
 			<version>${iDisguise.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- DisguiseCraft -->
@@ -435,6 +582,12 @@
 			<groupId>pgDev.bukkit.DisguiseCraft</groupId>
 			<artifactId>DisguiseCraft</artifactId>
 			<version>${disguisecraft.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- PvpArena -->
@@ -442,6 +595,12 @@
 			<groupId>net.slipcor.pvparena</groupId>
 			<artifactId>PVPArena</artifactId>
 			<version>${PvpArena.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MinigamesLib -->
@@ -449,6 +608,12 @@
 			<groupId>com.comze_instancelabs.minigamesapi.MinigamesAPI</groupId>
 			<artifactId>MinigamesLib</artifactId>
 			<version>${minigameslib.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- Minigames -->
@@ -465,6 +630,10 @@
 					<groupId>org.bukkit</groupId>
 					<artifactId>craftbukkit</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -473,6 +642,12 @@
 			<groupId>org.kitteh.vanish</groupId>
 			<artifactId>VanishNoPacket</artifactId>
 			<version>${vanishnopacket.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MobStacker -->
@@ -480,6 +655,12 @@
 			<groupId>com.kiwifisher.mobstacker</groupId>
 			<artifactId>MobStacker</artifactId>
 			<version>${MobStacker.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MythicMobs -->
@@ -507,6 +688,12 @@
 			<groupId>de.hellfirepvp</groupId>
 			<artifactId>CustomMobs</artifactId>
 			<version>${custommobs.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- InfernalMobs -->
@@ -514,6 +701,12 @@
 			<groupId>io.hotmail.com.jacob_vejvoda</groupId>
 			<artifactId>InfernalMobs</artifactId>
 			<version>${InfernalMobs.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MobArena -->
@@ -521,6 +714,12 @@
   			<groupId>com.garbagemule.MobArena</groupId>
 			<artifactId>MobArena</artifactId>
 			<version>${mobarena.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Holograms -->
@@ -528,6 +727,12 @@
 			<groupId>com.sainttx.holograms</groupId>
 			<artifactId>HologramPlugin</artifactId>
 			<version>${holograms.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- HologramDisplays -->
@@ -535,6 +740,12 @@
 			<groupId>com.gmail.filoghost.holographicdisplays</groupId>
 			<artifactId>HolographicDisplays</artifactId>
 			<version>${hologramdisplays.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- CMI Holograms -->
@@ -542,11 +753,23 @@
 			<groupId>com.Zrips.CMI</groupId>
 			<artifactId>CMI</artifactId>
 			<version>${CMI.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>net.Zrips.CMILib</groupId>
 			<artifactId>CMILib</artifactId>
 			<version>${CMILib.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- MassiveCore / Factions -->
@@ -554,17 +777,35 @@
 			<groupId>com.massivecraft.massivecore</groupId>
 			<artifactId>MassiveCore</artifactId>
 			<version>${massivecore.version}</version>
-		</dependency> 
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>com.massivecraft.factions</groupId>
 			<artifactId>Factions</artifactId>
 			<version>${factions.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.massivecraft.factions.P</groupId>
 			<artifactId>Factions</artifactId>
 			<version>1.6.9.5</version>
 			<classifier>B130</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- <dependency> <groupId>com.massivecraft</groupId> <artifactId>Factions</artifactId> 
 			<version>${factionsuuid.jar.version}</version> <scope>system</scope> <systemPath>${project.basedir}/lib/${factionsuuid.jar.version}</systemPath> 
@@ -583,6 +824,12 @@
 			<groupId>com.bekvon.bukkit.residence</groupId>
 			<artifactId>ResidenceCommandListener</artifactId>
 			<version>${residence.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- CrackShot -->
@@ -590,6 +837,12 @@
 			<groupId>com.shampaggon.crackshot</groupId>
 			<artifactId>CrackShot</artifactId>
 			<version>${crackshot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- WeaponMechanics -->
@@ -597,6 +850,12 @@
 			<groupId>me.deecaad.weaponmechanics</groupId>
 			<artifactId>WeaponMechanics</artifactId>
 			<version>${WeaponMechanics.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- ExtraHardMode -->
@@ -604,6 +863,34 @@
 			<groupId>com.extrahardmode</groupId>
 			<artifactId>ExtraHardMode</artifactId>
 			<version>${extrahardmode.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Vault -->
+		<dependency>
+			<groupId>net.milkbowl.vault</groupId>
+			<artifactId>Vault</artifactId>
+			<version>${vault.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -636,9 +923,9 @@
 		</repository> -->
 
 		<!-- Minigames / Addstar repo -->
-		<repository> 
-		    <id>addstar-snapshot-repo</id> 
-		    <url>http://maven.addstar.com.au/artifactory/ext-snapshot-local/</url> 
+		<repository>
+		    <id>addstar-snapshot-repo</id>
+		    <url>https://maven.addstar.com.au/artifactory/ext-snapshot-local/</url>
 		</repository>
 
 		<!-- md5 repository -->
