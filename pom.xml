@@ -4,7 +4,7 @@
 	<artifactId>MobHunting</artifactId>
 	<packaging>jar</packaging>
 	<!-- <version>8.5.5</version>  -->
-	<version>8.5.7-rc2</version>
+	<version>8.5.7-rc2-JL.1</version>
 	<!-- <version>8.1.9-SNAPSHOT-B${build.number}</version> -->
 	<name>MobHunting</name>
 	<url>https://www.spigotmc.org/resources/mobhunting.3582/</url>
