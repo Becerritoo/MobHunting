@@ -141,9 +141,28 @@ public class CitizensCompat implements Listener {
 	// OTHER FUNCTIONS
 	// **************************************************************************
 	public static void shutdown() {
-		if (supported) {
-			TraitInfo trait = TraitInfo.create(MasterMobHunterTrait.class).withName("MasterMobHunter");
-			citizensAPI.getTraitFactory().deregisterTrait(trait);
+		if (!supported || citizensAPI == null) {
+			return;
+		}
+
+		TraitInfo trait = TraitInfo.create(MasterMobHunterTrait.class).withName("MasterMobHunter");
+		try {
+			Object traitFactory = citizensAPI.getTraitFactory();
+			if (traitFactory == null) {
+				return;
+			}
+
+			try {
+				traitFactory.getClass().getMethod("deregisterTrait", TraitInfo.class).invoke(traitFactory, trait);
+			} catch (NoSuchMethodException ignored) {
+				MobHunting.getInstance().getMessages()
+						.debug("Citizens TraitFactory has no deregisterTrait(TraitInfo); skipping trait deregistration.");
+			}
+		} catch (Throwable t) {
+			Bukkit.getConsoleSender().sendMessage(MobHunting.PREFIX_WARNING
+					+ "Failed to deregister MasterMobHunter trait during Citizens shutdown cleanup.");
+			MobHunting.getInstance().getMessages().debug("Citizens shutdown cleanup error: %s: %s",
+					t.getClass().getSimpleName(), t.getMessage());
 		}
 	}
 
