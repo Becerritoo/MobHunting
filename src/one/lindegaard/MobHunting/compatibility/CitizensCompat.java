@@ -44,6 +44,7 @@ public class CitizensCompat implements Listener {
 	private static YamlConfiguration config = new YamlConfiguration();
 	public static final String MH_CITIZENS = "MH:CITIZENS";
 	private static boolean traitLookupWarningLogged = false;
+	private static boolean traitClassMissingLogged = false;
 
 	public CitizensCompat() {
 		if (!isEnabledInConfig()) {
@@ -250,6 +251,15 @@ public class CitizensCompat implements Listener {
 	}
 
 	private static void logTraitLookupIssue(String reason, String traitName, Throwable t) {
+		if ("Trait class not found".equals(reason)) {
+			if (traitClassMissingLogged)
+				return;
+			traitClassMissingLogged = true;
+			MobHunting.getInstance().getMessages().debug(
+					"Citizens trait '%s' not present. Skipping optional Sentry/Sentinel checks.", traitName);
+			return;
+		}
+
 		if (traitLookupWarningLogged)
 			return;
 		traitLookupWarningLogged = true;
