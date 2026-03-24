@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.lang.reflect.InvocationTargetException;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.CitizensPlugin;
@@ -42,6 +43,7 @@ public class CitizensCompat implements Listener {
 	private static File fileMobRewardData = new File(MobHunting.getInstance().getDataFolder(), "citizens-rewards.yml");
 	private static YamlConfiguration config = new YamlConfiguration();
 	public static final String MH_CITIZENS = "MH:CITIZENS";
+	private static boolean traitLookupWarningLogged = false;
 
 	public CitizensCompat() {
 		if (!isEnabledInConfig()) {
@@ -205,26 +207,59 @@ public class CitizensCompat implements Listener {
 	}
 
 	public static boolean isSentryOrSentinelOrSentries(Entity entity) {
-		if (isNPC(entity))
-			return CitizensAPI.getNPCRegistry().getNPC(entity)
-					.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentry"))
-					|| CitizensAPI.getNPCRegistry().getNPC(entity)
-							.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentinel"))
-					|| CitizensAPI.getNPCRegistry().getNPC(entity)
-							.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentries"));
-		return false;
+		if (entity == null || !isNPC(entity))
+			return false;
+		return isSentryOrSentinelOrSentries(CitizensAPI.getNPCRegistry().getNPC(entity));
 	}
 
 	public static boolean isSentryOrSentinelOrSentries(String mobtype) {
-		if (CitizensCompat.isNPC(Integer.valueOf(mobtype)))
-			return CitizensAPI.getNPCRegistry().getById(Integer.valueOf(mobtype))
-					.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentry"))
-					|| CitizensAPI.getNPCRegistry().getById(Integer.valueOf(mobtype))
-							.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentinel"))
-					|| CitizensAPI.getNPCRegistry().getById(Integer.valueOf(mobtype))
-							.hasTrait(CitizensAPI.getTraitFactory().getTraitClass("Sentries"));
-		else
+		if (!CitizensCompat.isNPC(Integer.valueOf(mobtype)))
 			return false;
+		return isSentryOrSentinelOrSentries(CitizensAPI.getNPCRegistry().getById(Integer.valueOf(mobtype)));
+	}
+
+	private static boolean isSentryOrSentinelOrSentries(NPC npc) {
+		if (npc == null)
+			return false;
+		return hasTraitSafely(npc, "Sentry") || hasTraitSafely(npc, "Sentinel") || hasTraitSafely(npc, "Sentries");
+	}
+
+	private static boolean hasTraitSafely(NPC npc, String traitName) {
+		if (npc == null || traitName == null)
+			return false;
+		try {
+			Class<?> traitClass = CitizensAPI.getTraitFactory().getTraitClass(traitName);
+			if (traitClass == null) {
+				logTraitLookupIssue("Trait class not found", traitName, null);
+				return false;
+			}
+
+			// Prefer reflection so we can short-circuit null/invalid class values across Citizens versions.
+			Object result = npc.getClass().getMethod("hasTrait", Class.class).invoke(npc, traitClass);
+			return result instanceof Boolean && (Boolean) result;
+		} catch (NoSuchMethodException e) {
+			logTraitLookupIssue("NPC.hasTrait(Class) missing", traitName, e);
+		} catch (IllegalAccessException e) {
+			logTraitLookupIssue("NPC.hasTrait(Class) access denied", traitName, e);
+		} catch (InvocationTargetException e) {
+			logTraitLookupIssue("NPC.hasTrait(Class) threw", traitName, e.getCause() != null ? e.getCause() : e);
+		} catch (Throwable t) {
+			logTraitLookupIssue("Unexpected Citizens trait lookup error", traitName, t);
+		}
+		return false;
+	}
+
+	private static void logTraitLookupIssue(String reason, String traitName, Throwable t) {
+		if (traitLookupWarningLogged)
+			return;
+		traitLookupWarningLogged = true;
+		Bukkit.getConsoleSender().sendMessage(
+				MobHunting.PREFIX_WARNING + "Citizens trait lookup degraded (" + reason + ") for '" + traitName
+						+ "'. Sentinel/Sentry checks are skipped safely.");
+		if (t != null) {
+			MobHunting.getInstance().getMessages().debug("Citizens trait lookup details: %s: %s",
+					t.getClass().getSimpleName(), t.getMessage());
+		}
 	}
 
 	public static HashMap<String, ExtendedMobRewardData> getMobRewardData() {
@@ -270,7 +305,8 @@ public class CitizensCompat implements Listener {
 		NPCRegistry n = CitizensAPI.getNPCRegistry();
 		for (Iterator<NPC> npcList = n.iterator(); npcList.hasNext();) {
 			NPC npc = npcList.next();
-			if (isSentryOrSentinelOrSentries(npc.getEntity())) {
+			Entity entity = npc.getEntity();
+			if (entity != null && isSentryOrSentinelOrSentries(entity)) {
 				if (mMobRewardData != null && !mMobRewardData.containsKey(String.valueOf(npc.getId()))) {
 					MobHunting.getInstance().getMessages().debug("A new Sentinel or Sentry NPC was found. ID=%s,%s",
 							npc.getId(), npc.getName());
@@ -280,7 +316,7 @@ public class CitizensCompat implements Listener {
 					saveCitizensData(String.valueOf(npc.getId()));
 				}
 			}
-			if (CitizensCompat.getMasterMobHunterManager().isMasterMobHunter(npc.getEntity())) {
+			if (entity != null && CitizensCompat.getMasterMobHunterManager().isMasterMobHunter(entity)) {
 				if (!CitizensCompat.getMasterMobHunterManager().contains(npc.getId())) {
 					MasterMobHunter masterMobHunter = new MasterMobHunter(MobHunting.getInstance(), npc);
 					CitizensCompat.getMasterMobHunterManager().put(npc.getId(), masterMobHunter);
@@ -288,7 +324,7 @@ public class CitizensCompat implements Listener {
 							npc.getFullName(), true, "0", 1, "You killed a Citizen",
 							new ArrayList<HashMap<String, String>>(), 1, 0.02);
 					CitizensCompat.getMobRewardData().put(String.valueOf(npc.getId()), rewardData);
-					npc.getEntity().setMetadata(CitizensCompat.MH_CITIZENS,
+					entity.setMetadata(CitizensCompat.MH_CITIZENS,
 							new FixedMetadataValue(MobHunting.getInstance(), rewardData));
 					MobHunting.getInstance().getStoreManager().insertCitizensMobs(String.valueOf(npc.getId()));
 					counter++;
