@@ -1,6 +1,9 @@
 package one.lindegaard.MobHunting.compatibility;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+import java.lang.reflect.Method;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -11,7 +14,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import io.hotmail.com.jacob_vejvoda.infernalmobs.InfernalMobsPlugin;
 import one.lindegaard.CustomItemsLib.compatibility.CompatPlugin;
 import one.lindegaard.CustomItemsLib.mobs.MobType;
 import one.lindegaard.MobHunting.MobHunting;
@@ -23,7 +25,8 @@ public class InfernalMobsCompat implements Listener {
 	private static boolean supported = false;
 	private static Plugin mPlugin;
 	private static HashMap<String, Double> mMobRewardData = new HashMap<String, Double>();
-	private static InfernalMobsPlugin api;
+	private static Method idSearchMethod;
+	private static Method findMobAbilitiesMethod;
 	public static final String MH_INFERNALMOBS = "MH:INFERNALMOBS";
 
 	public InfernalMobsCompat() {
@@ -32,13 +35,23 @@ public class InfernalMobsCompat implements Listener {
 					MobHunting.PREFIX_WARNING + "Compatibility with InfernalMobs is disabled in config.yml");
 		} else {
 			mPlugin = Bukkit.getPluginManager().getPlugin(CompatPlugin.InfernalMobs.getName());
+			if (mPlugin == null || !mPlugin.isEnabled()) {
+				Bukkit.getConsoleSender().sendMessage(
+						MobHunting.PREFIX_WARNING + "InfernalMobs plugin not found/enabled. Skipping compatibility.");
+				return;
+			}
+
+			if (!resolveInfernalApi()) {
+				Bukkit.getConsoleSender().sendMessage(
+						MobHunting.PREFIX_WARNING
+								+ "InfernalMobs API mismatch. Required methods idSearch(UUID) and findMobAbilities(UUID) not found.");
+				return;
+			}
 
 			Bukkit.getPluginManager().registerEvents(this, MobHunting.getInstance());
 
 			Bukkit.getConsoleSender().sendMessage(MobHunting.PREFIX + "Enabling Compatibility with InfernalMobs ("
 					+ getInfernalMobs().getDescription().getVersion() + ")");
-
-			api = (InfernalMobsPlugin) mPlugin;
 
 			loadInfernalMobsData();
 
@@ -51,8 +64,8 @@ public class InfernalMobsCompat implements Listener {
 	// **************************************************************************
 	// OTHER FUNCTIONS
 	// **************************************************************************
-	public static InfernalMobsPlugin getInfernalMobs() {
-		return (InfernalMobsPlugin) mPlugin;
+	public static Plugin getInfernalMobs() {
+		return mPlugin;
 	}
 
 	public static boolean isSupported() {
@@ -60,8 +73,10 @@ public class InfernalMobsCompat implements Listener {
 	}
 
 	public static boolean isInfernalMob(Entity entity) {
-		if (isSupported())
-			return entity.hasMetadata(MH_INFERNALMOBS) || api.idSearch(entity.getUniqueId()) != -1;
+		if (isSupported()) {
+			int id = invokeIdSearch(entity.getUniqueId());
+			return entity.hasMetadata(MH_INFERNALMOBS) || id != -1;
+		}
 		return false;
 	}
 
@@ -71,6 +86,43 @@ public class InfernalMobsCompat implements Listener {
 
 	public static boolean isEnabledInConfig() {
 		return MobHunting.getInstance().getConfigManager().enableIntegrationInfernalMobs;
+	}
+
+	private static boolean resolveInfernalApi() {
+		try {
+			idSearchMethod = mPlugin.getClass().getMethod("idSearch", UUID.class);
+			findMobAbilitiesMethod = mPlugin.getClass().getMethod("findMobAbilities", UUID.class);
+			return true;
+		} catch (NoSuchMethodException ex) {
+			idSearchMethod = null;
+			findMobAbilitiesMethod = null;
+			return false;
+		}
+	}
+
+	private static int invokeIdSearch(UUID uuid) {
+		if (idSearchMethod == null || mPlugin == null)
+			return -1;
+		try {
+			Object value = idSearchMethod.invoke(mPlugin, uuid);
+			if (value instanceof Number)
+				return ((Number) value).intValue();
+		} catch (Exception ignored) {
+		}
+		return -1;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static List<String> invokeFindMobAbilities(UUID uuid) {
+		if (findMobAbilitiesMethod == null || mPlugin == null)
+			return null;
+		try {
+			Object value = findMobAbilitiesMethod.invoke(mPlugin, uuid);
+			if (value instanceof List<?>)
+				return (List<String>) value;
+		} catch (Exception ignored) {
+		}
+		return null;
 	}
 
 	// **************************************************************************
@@ -91,9 +143,10 @@ public class InfernalMobsCompat implements Listener {
 	private void onInfernalMobDeathEvent(EntityDeathEvent event) {
 		Entity entity = event.getEntity();
 		if (isInfernalMob(entity)) {
-			if (api.findMobAbilities(entity.getUniqueId()) != null)
+			List<String> abilities = invokeFindMobAbilities(entity.getUniqueId());
+			if (abilities != null)
 				entity.setMetadata(MH_INFERNALMOBS,
-						new FixedMetadataValue(MobHunting.getInstance(), api.findMobAbilities(entity.getUniqueId())));
+						new FixedMetadataValue(MobHunting.getInstance(), abilities));
 		}
 	}
 
