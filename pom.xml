@@ -23,7 +23,8 @@
 
 		<minigameslib.version>1.14.16</minigameslib.version>
 		<minigames.version>	1.11.0</minigames.version>
-		<mypet.version>3.12-SNAPSHOT</mypet.version>
+		<mypet.version>4.0.4</mypet.version>
+		<mypet.jar>/srv/minecraft/server-jl/plugins/MyPet-4.0.4.jar</mypet.jar>
 		<mcmmohorses.version>4.3.57</mcmmohorses.version>
 		<PreciousStones.version>10.7.2</PreciousStones.version>
 		<libsdisguises.version>10.0.28</libsdisguises.version>
@@ -390,6 +391,8 @@
 			<groupId>de.keyle</groupId>
 			<artifactId>mypet</artifactId>
 			<version>${mypet.version}</version>
+			<scope>system</scope>
+			<systemPath>${mypet.jar}</systemPath>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>

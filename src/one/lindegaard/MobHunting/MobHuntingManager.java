@@ -835,7 +835,7 @@ public class MobHuntingManager implements Listener {
 					(int) killer.getLocation().getBlockY(), (int) killer.getLocation().getBlockZ());
 		else if (MyPetCompat.isKilledByMyPet(killed))
 			plugin.getMessages().debug("%s owned by %s killed a %s (%s)@(%s:%s,%s,%s)",
-					MyPetCompat.getMyPet(killed).getName(), MyPetCompat.getMyPetOwner(killed).getName(),
+					MyPetCompat.getMyPet(killed).getPetName(), MyPetCompat.getMyPetOwner(killed).getName(),
 					mob.getMobName(), mob.getMobPlugin().getName(),
 					MyPetCompat.getMyPetOwner(killed).getWorld().getName(),
 					(int) MyPetCompat.getMyPetOwner(killed).getLocation().getBlockX(),
@@ -1689,7 +1689,7 @@ public class MobHuntingManager implements Listener {
 			} else {
 				if (MyPetCompat.isKilledByMyPet(killed))
 					plugin.getMessages().debug("RecordAssistedKill: %s killed a %s (%s) Cash=%s",
-							player.getName() + "/" + MyPetCompat.getMyPet(killed).getName(), mob.getMobName(),
+							player.getName() + "/" + MyPetCompat.getMyPet(killed).getPetName(), mob.getMobName(),
 							mob.getMobPlugin().name(), plugin.getEconomyManager().format(cash));
 
 				else
@@ -1795,7 +1795,7 @@ public class MobHuntingManager implements Listener {
 					if (plugin.getConfigManager().dropMoneyOnGroup) {
 						if (MyPetCompat.isKilledByMyPet(killed))
 							plugin.getMessages().debug("1)%s was assisted by %s. Reward/Penalty is only ½ (%s)",
-									player.getName(), MyPetCompat.getMyPet(killed).getName(),
+									player.getName(), MyPetCompat.getMyPet(killed).getPetName(),
 									plugin.getEconomyManager().format(cash));
 						else if (CitizensCompat.isNPC(killer))
 							plugin.getMessages().debug("2)%s was assisted by %s. Reward/Penalty is only ½ (%s)",
@@ -1813,7 +1813,7 @@ public class MobHuntingManager implements Listener {
 							onAssist(player, killer, killed, info.getLastAssistTime());
 						if (MyPetCompat.isKilledByMyPet(killed))
 							plugin.getMessages().debug("%s was assisted by %s. Reward/Penalty is only ½ (%s)",
-									player.getName(), MyPetCompat.getMyPet(killed).getName(),
+									player.getName(), MyPetCompat.getMyPet(killed).getPetName(),
 									plugin.getEconomyManager().format(cash));
 						else
 							plugin.getMessages().debug("%s was assisted by %s. Reward/Penalty is only ½ (%s)",
@@ -2110,7 +2110,7 @@ public class MobHuntingManager implements Listener {
 		if (killer != null)
 			return killer.getName();
 		if (MyPetCompat.isKilledByMyPet(killed))
-			return MyPetCompat.getMyPet(killed).getName();
+			return MyPetCompat.getMyPet(killed).getPetName();
 		else
 			return "";
 	}

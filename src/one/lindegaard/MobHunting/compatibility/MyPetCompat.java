@@ -12,11 +12,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import de.Keyle.MyPet.MyPetPlugin;
-import de.Keyle.MyPet.api.entity.MyPet;
-import de.Keyle.MyPet.api.entity.MyPetBukkitEntity;
-import de.Keyle.MyPet.api.event.MyPetInventoryActionEvent;
-import de.Keyle.MyPet.api.event.MyPetInventoryActionEvent.Action;
-import de.Keyle.MyPet.api.event.MyPetPickupItemEvent;
+import de.Keyle.MyPet.api.entity.Pet;
+import de.Keyle.MyPet.api.event.PetInventoryActionEvent;
+import de.Keyle.MyPet.api.event.PetInventoryActionEvent.Action;
+import de.Keyle.MyPet.api.event.PetPickupItemEvent;
 import one.lindegaard.CustomItemsLib.Core;
 import one.lindegaard.CustomItemsLib.compatibility.CompatPlugin;
 import one.lindegaard.CustomItemsLib.rewards.Reward;
@@ -52,8 +51,8 @@ public class MyPetCompat implements Listener {
 	}
 
 	public static boolean isMyPet(Entity entity) {
-		if (isSupported())
-			return entity instanceof MyPetBukkitEntity;
+		if (isSupported() && entity != null)
+			return getMyPetPlugin().getPetManager().getPetFromEntity(entity) != null;
 		return false;
 	}
 
@@ -64,36 +63,43 @@ public class MyPetCompat implements Listener {
 	public static boolean isKilledByMyPet(Entity entity) {
 		if (isSupported() && (entity.getLastDamageCause() instanceof EntityDamageByEntityEvent)) {
 			EntityDamageByEntityEvent dmg = (EntityDamageByEntityEvent) entity.getLastDamageCause();
-			if (dmg != null && (dmg.getDamager() instanceof MyPetBukkitEntity))
+			if (dmg != null && isMyPet(dmg.getDamager()))
 				return true;
 		}
 		return false;
 	}
 
-	public static MyPetBukkitEntity getMyPet(Entity entity) {
-		EntityDamageByEntityEvent dmg = (EntityDamageByEntityEvent) entity.getLastDamageCause();
-
-		if (dmg == null || !(dmg.getDamager() instanceof MyPetBukkitEntity))
-			return null;
-
-		MyPetBukkitEntity killer = (MyPetBukkitEntity) dmg.getDamager();
-
-		return killer;
-	}
-
-	public static Player getMyPetOwner(Entity entity) {
+	public static Pet getMyPet(Entity entity) {
+		if (isMyPet(entity))
+			return getMyPetPlugin().getPetManager().getPetFromEntity(entity);
 
 		if (!(entity.getLastDamageCause() instanceof EntityDamageByEntityEvent))
 			return null;
 
 		EntityDamageByEntityEvent dmg = (EntityDamageByEntityEvent) entity.getLastDamageCause();
 
-		if (dmg == null || !(dmg.getDamager() instanceof MyPetBukkitEntity))
+		if (dmg == null)
 			return null;
 
-		MyPetBukkitEntity killer = (MyPetBukkitEntity) dmg.getDamager();
+		return getMyPetPlugin().getPetManager().getPetFromEntity(dmg.getDamager());
+	}
 
-		if (killer.getOwner() == null)
+	public static Player getMyPetOwner(Entity entity) {
+		Pet directPet = getMyPetPlugin().getPetManager().getPetFromEntity(entity);
+		if (directPet != null && directPet.getOwner() != null)
+			return directPet.getOwner().getPlayer();
+
+		if (!(entity.getLastDamageCause() instanceof EntityDamageByEntityEvent))
+			return null;
+
+		EntityDamageByEntityEvent dmg = (EntityDamageByEntityEvent) entity.getLastDamageCause();
+
+		if (dmg == null)
+			return null;
+
+		Pet killer = getMyPetPlugin().getPetManager().getPetFromEntity(dmg.getDamager());
+
+		if (killer == null || killer.getOwner() == null)
 			return null;
 
 		return killer.getOwner().getPlayer();
@@ -113,10 +119,10 @@ public class MyPetCompat implements Listener {
 			return;
 
 		EntityDamageByEntityEvent dmg = (EntityDamageByEntityEvent) event.getEntity().getLastDamageCause();
-		if (dmg == null || !(dmg.getDamager() instanceof MyPetBukkitEntity))
+		if (dmg == null || !isMyPet(dmg.getDamager()))
 			return;
 
-		MyPetBukkitEntity killer = (MyPetBukkitEntity) dmg.getDamager();
+		Pet killer = getMyPetPlugin().getPetManager().getPetFromEntity(dmg.getDamager());
 		if (killer.getOwner() != null) {
 			Player owner = killer.getOwner().getPlayer();
 			if (owner != null && MobHunting.getInstance().getMobHuntingManager().isHuntEnabled(owner))
@@ -127,19 +133,19 @@ public class MyPetCompat implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false)
-	private void onMyPetInventoryActionEvent(MyPetInventoryActionEvent event) {
-		if (event.getAction() == Action.Pickup)
+	private void onMyPetInventoryActionEvent(PetInventoryActionEvent event) {
+		if (event.getAction() == Action.PICKUP)
 			MobHunting.getInstance().getMessages().debug("MyPetInventoryActionEvent=%s", event.getAction().name());
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-	private void onMyPetPickupItem(MyPetPickupItemEvent event) {
+	private void onMyPetPickupItem(PetPickupItemEvent event) {
 		if (event.isCancelled())
 			return;
 
 		Item item = event.getItem();
 		Player player = event.getOwner().getPlayer();
-		MyPet pet = event.getPet();
+		Pet pet = event.getPet();
 
 		if (Reward.isReward(item)) {
 			Reward reward = Reward.getReward(item);
