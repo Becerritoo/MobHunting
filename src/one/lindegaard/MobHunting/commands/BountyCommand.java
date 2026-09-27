@@ -179,7 +179,7 @@ public class BountyCommand implements ICommand {
 							"mobhunting.commands.bounty.no-money", "money", plugin.getRewardManager().format(prize)));
 					return true;
 				}
-				if (prize <= 0)
+				if (!Double.isFinite(prize) || prize <= 0)
 					return false;
 				String message = "";
 				for (int i = 2; i < args.length; i++) {
@@ -187,6 +187,8 @@ public class BountyCommand implements ICommand {
 				}
 				Bounty bounty;
 				bounty = new Bounty(plugin, worldGroupName, bountyOwner, wantedPlayer, prize, message);
+				if (!plugin.getRewardManager().withdrawPlayer(bountyOwner, prize))
+					return true;
 				if (plugin.getBountyManager().hasOpenBounty(bounty)) {
 					plugin.getMessages().senderSendMessage(sender, plugin.getMessages().getString(
 							"mobhunting.commands.bounty.bounty-added", "wantedplayer", wantedPlayer.getName()));
@@ -197,7 +199,6 @@ public class BountyCommand implements ICommand {
 				}
 
 				plugin.getBountyManager().save(bounty);
-				plugin.getRewardManager().withdrawPlayer(bountyOwner, prize);
 				plugin.getMessages().senderSendMessage(sender,
 						plugin.getMessages().getString("mobhunting.commands.bounty.money-withdrawn", "money",
 								plugin.getRewardManager().format(prize)));
@@ -241,12 +242,13 @@ public class BountyCommand implements ICommand {
 				if (plugin.getBountyManager().hasOpenBounty(worldGroupName, wantedPlayer, bountyOwner)) {
 					Bounty bounty = plugin.getBountyManager().getOpenBounty(worldGroupName, wantedPlayer, bountyOwner);
 					int pct = plugin.getConfigManager().bountyReturnPct;
-					plugin.getRewardManager().depositPlayer(bountyOwner, bounty.getPrize() * pct / 100);
-					plugin.getBountyManager().cancel(bounty);
+					double refund = bounty.getPrize() * pct / 100;
+					if (!plugin.getBountyManager().refund(bounty))
+						return true;
 					plugin.getMessages().senderSendMessage(sender,
 							plugin.getMessages().getString("mobhunting.commands.bounty.bounty-removed", "wantedplayer",
 									wantedPlayer.getName(), "money",
-									String.format("%.2f", bounty.getPrize() * pct / 100)));
+									String.format("%.2f", refund)));
 					return true;
 				} else {
 					if (sender.hasPermission("mobhunting.bounty.admin")) {
@@ -291,11 +293,12 @@ public class BountyCommand implements ICommand {
 				}
 				if (plugin.getBountyManager().hasOpenBounty(worldGroupName, wantedPlayer, bountyOwner)) {
 					Bounty bounty = plugin.getBountyManager().getOpenBounty(worldGroupName, wantedPlayer, bountyOwner);
+					double removedPrize = bounty.getPrize();
 					plugin.getBountyManager().cancel(bounty);
 					plugin.getMessages().senderSendMessage(sender,
 							plugin.getMessages().getString("mobhunting.commands.bounty.bounty-removed-admin",
 									"wantedplayer", wantedPlayer.getName(), "bountyowner", bountyOwner.getName(),
-									"money", String.format("%.2f", bounty.getPrize())));
+									"money", String.format("%.2f", removedPrize)));
 					return true;
 				} else {
 					plugin.getMessages().senderSendMessage(sender,

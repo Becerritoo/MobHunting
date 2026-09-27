@@ -4,7 +4,7 @@
 	<artifactId>MobHunting</artifactId>
 	<packaging>jar</packaging>
 	<!-- <version>8.5.5</version>  -->
-	<version>8.5.7-rc2-JL.3</version>
+	<version>8.5.7-rc2-JL.6</version>
 	<!-- <version>8.1.9-SNAPSHOT-B${build.number}</version> -->
 	<name>MobHunting</name>
 	<url>https://www.spigotmc.org/resources/mobhunting.3582/</url>
@@ -18,7 +18,7 @@
 	</parent>
 
 	<properties>
-		<customitemslib.version>1.1.0</customitemslib.version>
+		<customitemslib.version>1.1.0-JL.11</customitemslib.version>
 		<bagofgold.version>4.5.6</bagofgold.version>
 
 		<minigameslib.version>1.14.16</minigameslib.version>
@@ -81,6 +81,7 @@
 	<!-- ********************************************************************** -->
 	<build>
 		<sourceDirectory>${basedir}/src</sourceDirectory>
+		<testSourceDirectory>${basedir}/test</testSourceDirectory>
 		<defaultGoal>clean install</defaultGoal>
 		<resources>
 			<resource>
@@ -149,6 +150,12 @@
 	<!-- **************************** Dependencies **************************** -->
 	<!-- ********************************************************************** -->
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId><artifactId>junit</artifactId><version>4.13.2</version><scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId><artifactId>mockito-core</artifactId><version>4.11.0</version><scope>test</scope>
+		</dependency>
 
 		<!-- SpigotMC -->
 		<dependency>

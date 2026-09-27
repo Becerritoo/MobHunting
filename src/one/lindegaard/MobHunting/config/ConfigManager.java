@@ -4080,6 +4080,11 @@ public class ConfigManager extends AutoConfig {
 			+ "\nhttp://towny.palmergames.com/")
 	public boolean enableIntegrationTowny = true;
 
+	@ConfigField(name = "enable_integration_betterrevive", category = "plugins.betterrevive", comment = "Attribute final deaths to the player who caused the BetterRevive knockdown."
+			+ "\nNo payout on knockdown. Reviving clears attribution; finishing blows do not replace it."
+			+ "\nThe attacker must be online at final death. Restart required when changing this option.")
+	public boolean enableIntegrationBetterRevive = true;
+
 	@ConfigField(name = "disable_rewards_in_home_town", category = "plugins.towny", comment = "Disable rewards when the player is in his hometown."
 			+ "\nhttp://towny.palmergames.com/")
 	public boolean disableRewardsInHomeTown = true;

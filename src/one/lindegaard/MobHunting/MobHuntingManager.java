@@ -11,7 +11,6 @@ import one.lindegaard.CustomItemsLib.mobs.MobType;
 import one.lindegaard.CustomItemsLib.rewards.CoreCustomItems;
 import one.lindegaard.CustomItemsLib.server.Servers;
 import one.lindegaard.MobHunting.bounty.Bounty;
-import one.lindegaard.MobHunting.bounty.BountyStatus;
 import one.lindegaard.MobHunting.compatibility.*;
 import one.lindegaard.MobHunting.events.BountyKillEvent;
 import one.lindegaard.MobHunting.events.MobHuntEnableCheckEvent;
@@ -295,6 +294,11 @@ public class MobHuntingManager implements Listener {
 			return;
 
 		EntityDamageEvent lastDamageCause = killed.getLastDamageCause();
+		if (plugin.getBetterReviveCompat() != null) {
+			one.lindegaard.MobHunting.compatibility.BetterReviveCompat.Downing downing =
+					plugin.getBetterReviveCompat().getDowning(killed.getUniqueId());
+			if (downing != null) lastDamageCause = downing.damage;
+		}
 		if (lastDamageCause instanceof EntityDamageByEntityEvent) {
 			Entity damager = ((EntityDamageByEntityEvent) lastDamageCause).getDamager();
 			Player killer = null;
@@ -661,6 +665,26 @@ public class MobHuntingManager implements Listener {
 		LivingEntity killed = event.getEntity();
 
 		Player killer = event.getEntity().getKiller();
+		EntityDamageEvent rewardDamage = killed.getLastDamageCause();
+		boolean betterReviveDeath = false;
+		if (killed instanceof Player && plugin.getBetterReviveCompat() != null) {
+			one.lindegaard.MobHunting.compatibility.BetterReviveCompat.Downing downing =
+					plugin.getBetterReviveCompat().getDowning(killed.getUniqueId());
+			if (downing != null) {
+				betterReviveDeath = true;
+				rewardDamage = downing.damage;
+				// Do not reuse an earlier assister or a later finishing attack.
+				mDamageHistory.remove(killed);
+				if (!downing.claim()) return;
+				killer = downing.attacker == null ? null : Bukkit.getPlayer(downing.attacker);
+				if (killer == null || !killer.isOnline()) {
+					plugin.getMessages().debug("BetterRevive: no online downing attacker for %s; no PVP payout", killed.getName());
+					return;
+				}
+				plugin.getMessages().debug("BetterRevive: final death of %s attributed to %s (downing cause %s)",
+						killed.getName(), killer.getName(), downing.cause);
+			}
+		}
 
 		ExtendedMob mob = plugin.getExtendedMobManager().getExtendedMobFromEntity(killed);
 		if (mob.getMob_id() == 0) {
@@ -1320,7 +1344,7 @@ public class MobHuntingManager implements Listener {
 		}
 
 		// MyPet killed a mob - Assister is the Owner
-		if (MyPetCompat.isKilledByMyPet(killed) && plugin.getConfigManager().enableAssists == true) {
+		if (!betterReviveDeath && MyPetCompat.isKilledByMyPet(killed) && plugin.getConfigManager().enableAssists == true) {
 			info.setAssister(MyPetCompat.getMyPetOwner(killed));
 			plugin.getMessages().debug("MyPetAssistedKill: Pet owned by %s killed a %s", info.getAssister().getName(),
 					mob.getMobName());
@@ -1571,8 +1595,8 @@ public class MobHuntingManager implements Listener {
 
 		// Apply the modifiers to Basic reward
 		EntityDamageByEntityEvent lastDamageCause = null;
-		if (killed.getLastDamageCause() instanceof EntityDamageByEntityEvent)
-			lastDamageCause = (EntityDamageByEntityEvent) killed.getLastDamageCause();
+		if (rewardDamage instanceof EntityDamageByEntityEvent)
+			lastDamageCause = (EntityDamageByEntityEvent) rewardDamage;
 		double multipliers = 1.0;
 		ArrayList<String> modifiers = new ArrayList<String>();
 		// only add modifiers if the killer is the player.
@@ -1615,7 +1639,7 @@ public class MobHuntingManager implements Listener {
 					plugin.getBountyManager().getAllBounties().size());
 			OfflinePlayer wantedPlayer = (OfflinePlayer) killed;
 			String worldGroupName = Core.getWorldGroupManager().getCurrentWorldGroup(player);
-			if (plugin.getBountyManager().hasOpenBounties(wantedPlayer)) {
+			if (!plugin.getBountyManager().getOpenBounties(worldGroupName, wantedPlayer).isEmpty()) {
 				BountyKillEvent bountyEvent = new BountyKillEvent(worldGroupName, player, wantedPlayer,
 						plugin.getBountyManager().getOpenBounties(worldGroupName, wantedPlayer));
 				Bukkit.getPluginManager().callEvent(bountyEvent);
@@ -1626,10 +1650,13 @@ public class MobHuntingManager implements Listener {
 					return;
 				}
 				Set<Bounty> bounties = plugin.getBountyManager().getOpenBounties(worldGroupName, wantedPlayer);
+				if (!plugin.getBountyManager().payBounties(player, bounties)) {
+					plugin.getMessages().debug("Bounty payment not completed for %s; bounties remain open", player.getName());
+					return;
+				}
 				for (Bounty b : bounties) {
 					reward += b.getPrize();
 					OfflinePlayer bountyOwner = b.getBountyOwner();
-					plugin.getBountyManager().delete(b);
 					if (bountyOwner != null && bountyOwner.isOnline()) {
 						plugin.getMessages().playerActionBarMessageQueue(Tools.getOnlinePlayer(bountyOwner),
 								plugin.getMessages().getString("mobhunting.bounty.bounty-claimed", "killer",
@@ -1637,8 +1664,6 @@ public class MobHuntingManager implements Listener {
 										"money", plugin.getEconomyManager().format(b.getPrize()), "killed",
 										killed.getName()));
 					}
-					b.setStatus(BountyStatus.completed);
-					plugin.getDataStoreManager().updateBounty(b);
 				}
 				plugin.getMessages().playerActionBarMessageQueue(player,
 						plugin.getMessages().getString("mobhunting.moneygain-for-killing", "prize",
@@ -1646,7 +1671,6 @@ public class MobHuntingManager implements Listener {
 								plugin.getEconomyManager().format(reward), "killed", killed.getName()));
 				plugin.getMessages().debug("Bounty: %s got %s for killing %s", player.getName(), reward,
 						killed.getName());
-				plugin.getRewardManager().depositPlayer(player, reward);
 				// plugin.getMessages().debug("RecordCash: %s killed a %s (%s)
 				// Cash=%s",
 				// killer.getName(), mob.getName(),

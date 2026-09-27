@@ -126,6 +126,11 @@ public class MobHunting extends JavaPlugin {
 	private AdvancementManager mAdvancementManager;
 	private CommandDispatcher mCommandDispatcher;
 	private CompatibilityManager mCompatibilityManager;
+	private one.lindegaard.MobHunting.compatibility.BetterReviveCompat betterReviveCompat;
+
+	public one.lindegaard.MobHunting.compatibility.BetterReviveCompat getBetterReviveCompat() {
+		return betterReviveCompat;
+	}
 	private SpigetUpdater mSpigetUpdater;
 
 	private boolean mInitialized = false;
@@ -349,6 +354,8 @@ public class MobHunting extends JavaPlugin {
 		mAchievementManager = new AchievementManager(this);
 
 		mMobHuntingManager = new MobHuntingManager(this);
+		betterReviveCompat = new one.lindegaard.MobHunting.compatibility.BetterReviveCompat(this);
+		betterReviveCompat.enable();
 		if (mConfig.enableFishingRewards)
 			mFishingManager = new FishingManager(this);
 
@@ -397,6 +404,7 @@ public class MobHunting extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		if (betterReviveCompat != null) betterReviveCompat.close();
 		getMessages().debug("Disabling MobHunting.");
 		disabling = true;
 

@@ -7,7 +7,6 @@ import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.achievements.AchievementManager;
 import one.lindegaard.MobHunting.compatibility.EssentialsCompat;
 import one.lindegaard.MobHunting.compatibility.VanishNoPacketCompat;
-import one.lindegaard.CustomItemsLib.storage.DataStoreManager;
 import one.lindegaard.CustomItemsLib.storage.IDataCallback;
 import one.lindegaard.CustomItemsLib.storage.UserNotFoundException;
 
@@ -43,12 +42,14 @@ public class BountyManager implements Listener {
 					plugin.getConfigManager().timeBetweenRandomBounties * 20 * 60,
 					plugin.getConfigManager().timeBetweenRandomBounties * 20 * 60);
 			Bukkit.getScheduler().runTaskTimer(MobHunting.getInstance(), () -> {
-				for (Bounty bounty : mOpenBounties) {
+				Iterator<Bounty> iterator = mOpenBounties.iterator();
+				while (iterator.hasNext()) {
+					Bounty bounty = iterator.next();
 					if (bounty.getEndDate() < System.currentTimeMillis() && bounty.isOpen()) {
+						iterator.remove();
 						bounty.setStatus(BountyStatus.expired);
 						plugin.getDataStoreManager().updateBounty(bounty);
 						plugin.getMessages().debug("BountyManager: Expired Bounty %s", bounty.toString());
-						mOpenBounties.remove(bounty);
 					}
 				}
 			}, 600, 7200);
@@ -74,15 +75,14 @@ public class BountyManager implements Listener {
 
 	public Bounty getOpenBounty(String worldGroup, OfflinePlayer wantedPlayer, OfflinePlayer bountyOwner) {
 		for (Bounty bounty : mOpenBounties) {
-			if (!bounty.isOpen() || !bounty.getWantedPlayer().equals(wantedPlayer))
-				continue;
-			return check(worldGroup, wantedPlayer, bountyOwner, bounty);
+			if (bounty.isOpen() && check(worldGroup, wantedPlayer, bountyOwner, bounty) != null)
+				return bounty;
 		}
 		return null;
 	}
 
 	public Bounty getBounty(String worldGroup, OfflinePlayer wantedPlayer, OfflinePlayer bountyOwner) {
-		return mOpenBounties.stream().findFirst().map(bounty -> check(worldGroup, wantedPlayer, bountyOwner, bounty))
+		return mOpenBounties.stream().filter(bounty -> check(worldGroup, wantedPlayer, bountyOwner, bounty) != null).findFirst()
 				.orElse(null);
 	}
 
@@ -150,21 +150,7 @@ public class BountyManager implements Listener {
 
 	// Tests
 	public boolean hasOpenBounty(String worldGroup, OfflinePlayer wantedPlayer, OfflinePlayer bountyOwner) {
-		for (Bounty bounty : mOpenBounties) {
-			if (!bounty.isOpen() || !bounty.getWorldGroup().equals(worldGroup)
-					|| !bounty.getWantedPlayer().equals(wantedPlayer)) {
-				continue;
-			}
-
-			if (bounty.getBountyOwner() != null && bountyOwner != null) {
-				return bounty.getBountyOwner().equals(bountyOwner);
-			} else if (bounty.getBountyOwner() == null && bountyOwner == null) {
-				return true;
-			}
-
-		}
-		return false;
-
+		return getOpenBounty(worldGroup, wantedPlayer, bountyOwner) != null;
 	}
 
 	public boolean hasOpenBounty(Bounty b) {
@@ -311,20 +297,52 @@ public class BountyManager implements Listener {
 	public void cancel(Bounty bounty) {
 		Bounty b1 = getOpenBounty(bounty);
 		if (b1 != null) {
+			mOpenBounties.remove(b1);
 			b1.setStatus(BountyStatus.canceled);
 			b1.setPrize(0);
-			mOpenBounties.add(b1);
 			plugin.getDataStoreManager().updateBounty(b1);
 			// mOpenBounties.removeIf(b -> b.equals(bounty));
 		}
 	}
 
+	public boolean refund(Bounty bounty) {
+		if (bounty == null || getOpenBounty(bounty) == null || bounty.getBountyOwner() == null)
+			return false;
+		double amount = bounty.getPrize() * plugin.getConfigManager().bountyReturnPct / 100;
+		if (!Double.isFinite(amount) || amount < 0 || !plugin.getRewardManager().depositPlayer(bounty.getBountyOwner(), amount))
+			return false;
+		cancel(bounty);
+		return true;
+	}
+
+	public boolean payBounties(Player hunter, Set<Bounty> bounties) {
+		if (bounties.isEmpty())
+			return false;
+		double amount = 0;
+		for (Bounty bounty : bounties) {
+			if (getOpenBounty(bounty) == null || !Double.isFinite(bounty.getPrize()) || bounty.getPrize() <= 0)
+				return false;
+			amount += bounty.getPrize();
+		}
+		if (!Double.isFinite(amount) || !plugin.getRewardManager().depositPlayer(hunter, amount))
+			return false;
+		// Status participates in Bounty.hashCode(); remove before changing it.
+		for (Bounty bounty : bounties) {
+			mOpenBounties.remove(bounty);
+			bounty.setStatus(BountyStatus.completed);
+		}
+		for (Bounty bounty : bounties) {
+			plugin.getDataStoreManager().updateBounty(bounty);
+		}
+		return true;
+	}
+
 	public void delete(Bounty bounty) {
 		Bounty b1 = getOpenBounty(bounty);
 		if (b1 != null) {
+			mOpenBounties.remove(b1);
 			b1.setStatus(BountyStatus.deleted);
 			b1.setPrize(0);
-			mOpenBounties.add(b1);
 			plugin.getDataStoreManager().updateBounty(b1);
 			// mOpenBounties.removeIf(b -> b.equals(bounty));
 		}
@@ -502,8 +520,7 @@ public class BountyManager implements Listener {
 				}
 				if (randomPlayer != null) {
 					String worldGroup = Core.getWorldGroupManager().getCurrentWorldGroup(randomPlayer);
-					Bounty randomBounty = new Bounty(plugin, worldGroup,
-							Bukkit.getOfflinePlayer(UUID.fromString(DataStoreManager.RANDOM_PLAYER_UUID)), randomPlayer,
+					Bounty randomBounty = new Bounty(plugin, worldGroup, null, randomPlayer,
 							Tools.round(
 									plugin.getRewardManager().getRandomPrice(plugin.getConfigManager().randomBounty)),
 							"Random Bounty");
