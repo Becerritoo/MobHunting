@@ -1,3 +1,49 @@
+V8.5.7-rc2-JL.6 (2026-09-27 publication)
+* JL fork target: Paper 1.21.11; branch release/paper-1.21.11.
+* Server operator confirmed successful in-game validation on Minecraft 1.21.11 on 2026-09-27.
+* BetterRevive: attribute final death to the original downing player, including projectiles.
+* No payout on knockdown; revival clears attribution; finishing blows do not replace the attacker.
+* Prevent duplicate attributed death processing. Attacker must be online; attribution is not persisted across restarts.
+* Include MyPet 4.0.4 compatibility and CustomItemsLib 1.1.0-JL.11 dependency.
+* Add 13 BetterRevive regression tests, alongside 9 bounty tests.
+* Consolidates previously local changes; preserves the JL.6 binary validated on the server.
+
+V8.5.7-rc2-JL.5 (local deployment, 2026-09-20; included in JL.6)
+* Fix bounty lookup by sponsor, target and world group.
+* Check withdrawal before saving a bounty; keep bounties open if payment/refund fails.
+* Reject non-finite prizes and fix removal before status changes and during expiry iteration.
+* Preserve amounts in cancellation messages; retain the configured 50 percent refund on the server.
+* Add 9 bounty regression tests.
+
+Changes after JL.3 (included in JL.6)
+* 2026-03-30, 45b28d1d: reflective InfernalMobs integration for renamed plugin main classes.
+* 2026-09-24, e624ba22: adapt MyPet integration to 4.x.
+* No standalone JL.4 tag/release existed at consolidation; no retrospective tag is assigned.
+
+V8.5.7-rc2-JL.3 (2026-03-29)
+* Bound asynchronous datastore shutdown waits and improve worker termination.
+* Guard modern Citizens trait lookup and reduce optional missing-trait messages to debug.
+* Release notes report testing on Paper 1.21.11.
+
+V8.5.7-rc2-JL.2 (2026-03-23)
+* Defensive Citizens trait deregistration during shutdown.
+* Reward aliases: ARMADILLO -> turtle, BOGGED -> stray, BREEZE -> vex, CREAKING -> warden.
+* These aliases reuse existing reward settings rather than adding dedicated mob sections.
+
+V8.5.7-rc2-JL.1 (2026-03-23)
+* Skip missing player records without aborting statistics and achievement save batches.
+
+V8.5.7-rc2 (2026-03-20)
+* Support Towny 0.102+ through a reflective TownyAPI bridge.
+
+V8.5.7-rc1 (2026-03-20 publication)
+* Guard unavailable advancement manager calls on Paper.
+
+V8.5.6 (2026-03-18 publication)
+* Initial JL release for Paper 1.21.4, based on upstream commit 95610e8b.
+
+Upstream history (unchanged below)
+
 V8.5.5
 * Support for TitleManager removed because the Repository is broken and the plugin has not been updated for a long time.
 V8.5.4
