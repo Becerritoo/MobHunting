@@ -10,16 +10,16 @@ This fork is maintained by [Becerritoo](https://github.com/Becerritoo) and conti
 work originally created by Rocologo. It focuses on current Paper releases, reliability and
 compatibility with the plugins in the MobHunting ecosystem.
 
-The current release is `8.6.0`, validated on Paper 1.21.11. Plugin releases follow
+The current release is `8.6.1`, validated on Paper 1.21.11. Plugin releases follow
 [Semantic Versioning](https://semver.org/); the MobHunting version does not mirror the
 Minecraft or Paper version.
 
 See [changelog.txt](changelog.txt) for the complete history and
-[the 8.6.0 release notes](releases/v8.6.0.md) for compatibility and validation details.
+[the 8.6.1 release notes](releases/v8.6.1.md) for compatibility and validation details.
 
 ### Build and compatibility
 
-MobHunting 8.6.0 uses CustomItemsLib `1.1.0-JL.13` and MyPet `4.0.4`.
+MobHunting 8.6.1 uses CustomItemsLib `1.2.0` and MyPet `4.0.4`.
 The inherited Spigot API dependency is `1.21.4-R0.1-SNAPSHOT`; runtime validation targets **Paper 1.21.11**.
 `api-version: 1.21` is plugin metadata, not a claim of validation on every Minecraft release.
 
@@ -54,7 +54,7 @@ You should also look at following recommended plugins:
 * MasterMobHunters (Citizens2) and Signs
 * Leaderboards
 * Mob grinder detection
-* Version 8.6.0 validated on Paper 1.21.11; other versions are not validated by this release.
+* Version 8.6.1 validated on Paper 1.21.11; other versions are not validated by this release.
 * Heavily customizable
 * Language support
 * Tested on SpigotMC, CraftBukkit, PaperSpigot/PaperClip
