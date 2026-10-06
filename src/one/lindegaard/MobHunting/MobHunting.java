@@ -8,6 +8,7 @@ import one.lindegaard.CustomItemsLib.storage.DataStoreException;
 import one.lindegaard.CustomItemsLib.Core;
 import one.lindegaard.CustomItemsLib.Tools;
 import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
+import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
 import one.lindegaard.CustomItemsLib.compatibility.CompatPlugin;
 import one.lindegaard.MobHunting.Api.MobHuntingAPI;
 import one.lindegaard.MobHunting.achievements.*;
@@ -258,7 +259,7 @@ public class MobHunting extends JavaPlugin {
 		mCompatibilityManager.registerPlugin(HologramsCompat.class, CompatPlugin.Holograms);
 		mCompatibilityManager.registerPlugin(HolographicDisplaysCompat.class, CompatPlugin.HolographicDisplays);
 		mCompatibilityManager.registerPlugin(CMICompat.class, CompatPlugin.CMI);
-		mCompatibilityManager.registerPlugin(CMICompat.class, CompatPlugin.CMILib);
+		mCompatibilityManager.registerPlugin(CMILibCompat.class, CompatPlugin.CMILib);
 		mCompatibilityManager.registerPlugin(FactionsHelperCompat.class, CompatPlugin.Factions);
 		mCompatibilityManager.registerPlugin(TownyCompat.class, CompatPlugin.Towny);
 		mCompatibilityManager.registerPlugin(ResidenceCompat.class, CompatPlugin.Residence);

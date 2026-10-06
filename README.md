@@ -4,25 +4,28 @@ MobHunting
 =====================
 *MobHunting adds a new level of fun to hunting monsters, animals or opponents. Now you can get money or even dead players skull from kills, get bonuses for skilled and creative kills, and get special achievements!*
 
-## JL fork: Paper 1.21.11
+## Maintained fork
 
-Active branch: [`release/paper-1.21.11`](https://github.com/Becerritoo/MobHunting/tree/release/paper-1.21.11).
-Current release: [`8.5.7-rc2-JL.6`](https://github.com/Becerritoo/MobHunting/releases/tag/v8.5.7-rc2-JL.6).
-The server operator confirmed successful in-game validation on Minecraft 1.21.11 on 2026-09-27.
-The previous `release/paper-1.21.4` branch is retained as historical development.
+This fork is maintained by [Becerritoo](https://github.com/Becerritoo) and continues the
+work originally created by Rocologo. It focuses on current Paper releases, reliability and
+compatibility with the plugins in the MobHunting ecosystem.
 
-See [changelog.txt](changelog.txt) for JL changes and upstream history, and
-[release notes](releases/v8.5.7-rc2-JL.6.md) for artifact provenance and validation.
+The current release is `8.6.0`, validated on Paper 1.21.11. Plugin releases follow
+[Semantic Versioning](https://semver.org/); the MobHunting version does not mirror the
+Minecraft or Paper version.
+
+See [changelog.txt](changelog.txt) for the complete history and
+[the 8.6.0 release notes](releases/v8.6.0.md) for compatibility and validation details.
 
 ### Build and compatibility
 
-The installed JL.6 build uses CustomItemsLib `1.1.0-JL.11` and MyPet `4.0.4`.
-The inherited Spigot API dependency is still `1.21.4-R0.1-SNAPSHOT`; runtime validation targets **1.21.11**.
+MobHunting 8.6.0 uses CustomItemsLib `1.1.0-JL.13` and MyPet `4.0.4`.
+The inherited Spigot API dependency is `1.21.4-R0.1-SNAPSHOT`; runtime validation targets **Paper 1.21.11**.
 `api-version: 1.21` is plugin metadata, not a claim of validation on every Minecraft release.
 
-Build with the existing JL Maven dependency environment using `mvn -o -B -ntp package`.
+Build with the existing Maven dependency environment using `mvn -B -ntp package`.
 The parent `one.lindegaard:Main:0.1.6-SNAPSHOT` and legacy/custom dependencies must be available.
-MyPet currently uses a local system dependency; on another machine supply
+MyPet currently uses a local system dependency. Place `MyPet-4.0.4.jar` in `lib/` or supply
 `-Dmypet.jar=/absolute/path/to/MyPet-4.0.4.jar`.
 A clean checkout alone does not provision these dependencies.
 
@@ -51,7 +54,7 @@ You should also look at following recommended plugins:
 * MasterMobHunters (Citizens2) and Signs
 * Leaderboards
 * Mob grinder detection
-* JL release validated on Minecraft 1.21.11; other versions are not validated by this release.
+* Version 8.6.0 validated on Paper 1.21.11; other versions are not validated by this release.
 * Heavily customizable
 * Language support
 * Tested on SpigotMC, CraftBukkit, PaperSpigot/PaperClip

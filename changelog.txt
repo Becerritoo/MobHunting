@@ -1,3 +1,13 @@
+V8.6.0 (2026-10-06)
+* Begin semantic versioning for the fork maintained by Becerritoo.
+* Validate the release on Paper 1.21.11.
+* Separate CMILib action-bar and boss-bar support from the optional CMI plugin integration.
+* Keep CMI-specific hologram support independent from CMILib visual messages.
+* Ignore incompatible plugins that share the Herobrine name instead of failing during startup.
+* Catch optional integration linkage errors so one incompatible dependency cannot stop MobHunting.
+* Include the bounty, BetterRevive, MyPet, InfernalMobs, Citizens, Towny and datastore fixes from the maintained fork line.
+* Add 23 regression tests covering bounty handling, BetterRevive attribution and Herobrine API identity.
+
 V8.5.7-rc2-JL.6 (2026-09-27 publication)
 * JL fork target: Paper 1.21.11; branch release/paper-1.21.11.
 * Server operator confirmed successful in-game validation on Minecraft 1.21.11 on 2026-09-27.
@@ -1172,7 +1182,7 @@ V3.2.0
   * /mh bounty playername nogui
   * /mh bounty playername gui
 * Improved Minecraft version test, now using a faster method. The old method could cause a sort lag, when killing a Mob!  
-  
+
 V3.1.9
 * Added new Mobs Husk and Stray 
 * Fixed bug when MobStacker was not installed 
@@ -1214,4 +1224,3 @@ V3.1.0
 V3.0.8
 * Fixed bug: players could get achievement Creepercide and Fangmaster while playing MobArena
 * Fixed bug: added two database closing statements which could make the server hang after new players had joined the server.
-  

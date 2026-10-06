@@ -28,7 +28,7 @@ public class CompatibilityManager implements Listener {
 	public void registerPlugin(@SuppressWarnings("rawtypes") Class c, CompatPlugin pluginName) {
 		try {
 			register(c, pluginName);
-		} catch (Exception e) {
+		} catch (Exception | LinkageError e) {
 			Bukkit.getServer().getConsoleSender()
 					.sendMessage(MobHunting.PREFIX_ERROR + "MobHunting could not register with [" + pluginName
 							+ "] please check if [" + pluginName + "] is compatible with the server ["

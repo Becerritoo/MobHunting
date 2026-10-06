@@ -22,6 +22,7 @@ import one.lindegaard.MobHunting.compatibility.BattleArenaCompat;
 import one.lindegaard.CustomItemsLib.compatibility.BossBarAPICompat;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
+import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.ConquestiaMobsCompat;
 import one.lindegaard.MobHunting.compatibility.CrackShotCompat;
@@ -199,6 +200,7 @@ public class MetricsManager {
 						valueMap.put("ExtraHardMode", ExtraHardModeCompat.isSupported() ? 1 : 0);
 						valueMap.put("CrackShot", CrackShotCompat.isSupported() ? 1 : 0);
 						valueMap.put("CMI", CMICompat.isSupported() ? 1 : 0);
+						valueMap.put("CMILib", CMILibCompat.isSupported() ? 1 : 0);
 						return valueMap;
 					}
 

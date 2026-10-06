@@ -43,6 +43,15 @@ public class HerobrineCompat implements Listener {
 					.sendMessage(MobHunting.PREFIX_WARNING + "Compatibility with Herobrine is disabled in config.yml");
 		} else {
 			mPlugin = Bukkit.getPluginManager().getPlugin(CompatPlugin.Herobrine.getName());
+			// Several unrelated plugins use the generic name "Herobrine". This
+			// integration only supports TheProgrammersWorld's JavaPlugin/API.
+			// Check the main class by name before resolving its optional API classes.
+			if (mPlugin == null || !HerobrineApiIdentity.supports(mPlugin.getClass().getName())) {
+				Bukkit.getConsoleSender().sendMessage(MobHunting.PREFIX_WARNING
+						+ "Ignoring plugin named Herobrine: unsupported main class "
+						+ (mPlugin == null ? "<missing>" : mPlugin.getClass().getName()));
+				return;
+			}
 
 			Bukkit.getPluginManager().registerEvents(this, MobHunting.getInstance());
 

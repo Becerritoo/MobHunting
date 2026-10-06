@@ -3,6 +3,7 @@
 /.classpath
 /.project
 /target
+/lib/*.jar
 *.iml
 .idea/
 doc

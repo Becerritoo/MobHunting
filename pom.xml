@@ -4,7 +4,7 @@
 	<artifactId>MobHunting</artifactId>
 	<packaging>jar</packaging>
 	<!-- <version>8.5.5</version>  -->
-	<version>8.5.7-rc2-JL.6</version>
+	<version>8.6.0</version>
 	<!-- <version>8.1.9-SNAPSHOT-B${build.number}</version> -->
 	<name>MobHunting</name>
 	<url>https://www.spigotmc.org/resources/mobhunting.3582/</url>
@@ -18,13 +18,13 @@
 	</parent>
 
 	<properties>
-		<customitemslib.version>1.1.0-JL.11</customitemslib.version>
+		<customitemslib.version>1.1.0-JL.13</customitemslib.version>
 		<bagofgold.version>4.5.6</bagofgold.version>
 
 		<minigameslib.version>1.14.16</minigameslib.version>
 		<minigames.version>	1.11.0</minigames.version>
 		<mypet.version>4.0.4</mypet.version>
-		<mypet.jar>/srv/minecraft/server-jl/plugins/MyPet-4.0.4.jar</mypet.jar>
+		<mypet.jar>${project.basedir}/lib/MyPet-${mypet.version}.jar</mypet.jar>
 		<mcmmohorses.version>4.3.57</mcmmohorses.version>
 		<PreciousStones.version>10.7.2</PreciousStones.version>
 		<libsdisguises.version>10.0.28</libsdisguises.version>
@@ -67,13 +67,14 @@
 	</properties>
 
 	<issueManagement>
-		<url>https://github.com/Rocologo/MobHunting/issues</url>
+		<system>GitHub</system>
+		<url>https://github.com/Becerritoo/MobHunting/issues</url>
 	</issueManagement>
 
 	<scm>
-		<connection>scm:svn:https://github.com/Rocologo/MobHunting.git</connection>
-		<developerConnection>scm:svn:https://github.com/Rocologo</developerConnection>
-		<url>https://github.com/Rocologo/MobHunting</url>
+		<connection>scm:git:https://github.com/Becerritoo/MobHunting.git</connection>
+		<developerConnection>scm:git:git@github.com:Becerritoo/MobHunting.git</developerConnection>
+		<url>https://github.com/Becerritoo/MobHunting</url>
 	</scm>
 
 	<!-- ********************************************************************** -->
