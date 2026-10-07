@@ -40,8 +40,12 @@ public enum MobPlugin {
 		return name;
 	}
 
-	public MobPlugin valueOf(int id) {
-		return MobPlugin.values()[id];
+	public static MobPlugin fromId(int id) {
+		for (MobPlugin plugin : values()) {
+			if (plugin.id == id)
+				return plugin;
+		}
+		throw new IllegalArgumentException("Unknown MobPlugin id: " + id);
 	}
 
 	public String getName() {

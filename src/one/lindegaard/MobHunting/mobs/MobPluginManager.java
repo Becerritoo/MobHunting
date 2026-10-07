@@ -39,7 +39,7 @@ public class MobPluginManager {
 	}
 
 	public static MobPlugin valueOf(int i) {
-		return MobPlugin.values()[i];
+		return MobPlugin.fromId(i);
 	}
 
 }
