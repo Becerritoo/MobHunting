@@ -32,7 +32,6 @@ import one.lindegaard.MobHunting.compatibility.ExtraHardModeCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat.FactionsVersion;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LibsDisguisesCompat;
@@ -199,7 +198,6 @@ public class MetricsManager {
 				valueMap.put("StackMob", StackMobCompat.isSupported() ? 1 : 0);
 				valueMap.put("MysteriousHalloween", MysteriousHalloweenCompat.isSupported() ? 1 : 0);
 				valueMap.put("InfernalMobs", InfernalMobsCompat.isSupported() ? 1 : 0);
-				valueMap.put("Herobrine", HerobrineCompat.isSupported() ? 1 : 0);
 				valueMap.put("EliteMobs", EliteMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("Boss mobs", BossCompat.isSupported() ? 1 : 0);
 				return valueMap;

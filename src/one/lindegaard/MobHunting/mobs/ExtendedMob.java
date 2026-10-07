@@ -15,7 +15,6 @@ import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -122,10 +121,7 @@ public class ExtendedMob {
 		case InfernalMobs:
 			return "Infernal " + mobtype;
 		case Herobrine:
-			if (HerobrineCompat.getMobRewardData().containsKey(mobtype))
-				return HerobrineCompat.getMobRewardData().get(mobtype).getMobName();
-			else
-				return mobtype;
+			return mobtype;
 		case EliteMobs:
 			if (EliteMobsCompat.getMobRewardData().containsKey(mobtype))
 				return EliteMobsCompat.getMobRewardData().get(mobtype).getMobName();
@@ -172,7 +168,7 @@ public class ExtendedMob {
 		case InfernalMobs:
 			return InfernalMobsCompat.getProgressAchievementLevel1(mobtype);
 		case Herobrine:
-			return HerobrineCompat.getProgressAchievementLevel1(mobtype);
+			return 0;
 		case EliteMobs:
 			return EliteMobsCompat.getProgressAchievementLevel1(mobtype);
 		case Boss:

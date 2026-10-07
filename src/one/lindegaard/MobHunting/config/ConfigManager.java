@@ -543,10 +543,6 @@ public class ConfigManager extends AutoConfig {
 				"########################################################################" + "\nExtraHardMode"
 						+ "\n########################################################################");
 
-		setCategoryComment("plugins.herobrine",
-				"########################################################################" + "\nHerobrine"
-						+ "\n########################################################################");
-
 		setCategoryComment("plugins.boss", "########################################################################"
 				+ "\nBoss" + "\n########################################################################");
 
@@ -4740,10 +4736,6 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "extra_hard_mode.enable_integration_extra_hard_mode", category = "plugins", comment = "Enable/Disable integration with ExtraHardmode."
 			+ "\nhttps://www.spigotmc.org/resources/extra_hard_mode.19673/")
 	public boolean enableIntegrationExtraHardMode = true;
-
-	@ConfigField(name = "herobrine.enable_integration_herobrine", category = "plugins", comment = "Enable/Disable integration with Herobrine."
-			+ "\nhttps://www.theprogrammersworld.net/Herobrine/")
-	public boolean enableIntegrationHerobrine = true;
 
 	@ConfigField(name = "boss.enable_integration_boss", category = "plugins", comment = "Enable/Disable integration with Boss."
 			+ "\nhttps://")

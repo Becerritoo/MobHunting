@@ -18,7 +18,6 @@ import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -47,8 +46,6 @@ public class ExtendedMobManager {
 			plugin.getStoreManager().insertTARDISWeepingAngelsMobs();
 		if (MysteriousHalloweenCompat.isSupported())
 			plugin.getStoreManager().insertMysteriousHalloweenMobs();
-		if (HerobrineCompat.isSupported())
-			plugin.getStoreManager().insertHerobrineMobs();
 		if (EliteMobsCompat.isSupported())
 			plugin.getStoreManager().insertEliteMobs();
 		if (BossCompat.isSupported())
@@ -108,9 +105,7 @@ public class ExtendedMobManager {
 				break;
 
 			case Herobrine:
-				if (!HerobrineCompat.isSupported() || !HerobrineCompat.isEnabledInConfig())
-					continue;
-				break;
+				continue;
 
 			case EliteMobs:
 				if (!EliteMobsCompat.isSupported() || !EliteMobsCompat.isEnabledInConfig())
@@ -206,9 +201,6 @@ public class ExtendedMobManager {
 				// plugin.getMessages().debug("unhandled entity %s", entity.getType());
 				mobtype = "";
 			}
-		} else if (HerobrineCompat.isHerobrineMob(entity)) {
-			mobPlugin = MobPlugin.Herobrine;
-			mobtype = HerobrineCompat.getHerobrineMobType(entity);
 		} else if (EliteMobsCompat.isEliteMobs(entity)) {
 			mobPlugin = MobPlugin.EliteMobs;
 			mobtype = EliteMobsCompat.getEliteMobsType(entity).name();

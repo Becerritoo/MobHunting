@@ -114,7 +114,6 @@ import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.MyPetCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -512,13 +511,6 @@ public class RewardManager {
 					MyPetCompat.getMyPetOwner(mob));
 			return getPrice(mob, plugin.getConfigManager().wolfMoney);
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return getPrice(mob, HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
-						.getRewardPrize());
-			plugin.getMessages().debug("Herobrine mob %s has no reward data", HerobrineCompat.getHerobrineMobType(mob));
-			return 0;
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return getPrice(mob, EliteMobsCompat.getMobRewardData()
@@ -908,12 +900,6 @@ public class RewardManager {
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getConsoleRunCommand();
 			return new ArrayList<>();
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
-						.getConsoleRunCommand();
-			return new ArrayList<>();
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return EliteMobsCompat.getMobRewardData().get(EliteMobsCompat.getEliteMobsType(mob).getName())
@@ -1239,12 +1225,6 @@ public class RewardManager {
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getRewardDescription();
 			return "";
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
-						.getRewardDescription();
-			return "";
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return EliteMobsCompat.getMobRewardData().get(EliteMobsCompat.getEliteMobsType(mob).getName())
@@ -1560,11 +1540,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getChance();
-			return 0;
-
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob)).getChance();
 			return 0;
 
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
@@ -1885,12 +1860,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name())
-						.getMcMMOSkillRewardChance();
-			return 0;
-
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
 						.getMcMMOSkillRewardChance();
 			return 0;
 
@@ -2239,12 +2208,6 @@ public class RewardManager {
 						.getMcMMOSkillRewardAmount();
 			return 0;
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
-						.getMcMMOSkillRewardAmount();
-			return 0;
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return EliteMobsCompat.getMobRewardData().get(EliteMobsCompat.getEliteMobsType(mob).getName())
@@ -2560,11 +2523,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).isMobEnabled();
-			return false;
-
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob)).isMobEnabled();
 			return false;
 
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
@@ -2892,13 +2850,6 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return false;
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return false;
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
-			return false;
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return false;
@@ -3223,18 +3174,9 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return 0;
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return 0;
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
-			return 0;
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return 0;
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
 			return 0;
 
 		} else if (BossCompat.isBossMob(mob)) {
@@ -3555,18 +3497,9 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return "";
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return "";
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
-			return "";
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return "";
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
 			return "";
 
 		} else if (BossCompat.isBossMob(mob)) {
@@ -3888,18 +3821,9 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return 0;
 
-		} else if (HerobrineCompat.isHerobrineMob(mob)) {
-			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
-				return 0;
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
-			return 0;
-
 		} else if (EliteMobsCompat.isEliteMobs(mob)) {
 			if (EliteMobsCompat.getMobRewardData().containsKey(EliteMobsCompat.getEliteMobsType(mob).getName()))
 				return 0;
-			// return
-			// HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(killed)).isMobEnabled();
 			return 0;
 
 		} else if (BossCompat.isBossMob(mob)) {

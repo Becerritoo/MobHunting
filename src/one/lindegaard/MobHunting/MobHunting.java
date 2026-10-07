@@ -47,7 +47,6 @@ import one.lindegaard.MobHunting.compatibility.EssentialsCompat;
 import one.lindegaard.MobHunting.compatibility.ExtraHardModeCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LibsDisguisesCompat;
@@ -288,7 +287,6 @@ public class MobHunting extends JavaPlugin {
 		mCompatibilityManager.registerPlugin(MysteriousHalloweenCompat.class, CompatPlugin.MysteriousHalloween);
 		mCompatibilityManager.registerPlugin(CitizensCompat.class, CompatPlugin.Citizens);
 		mCompatibilityManager.registerPlugin(InfernalMobsCompat.class, CompatPlugin.InfernalMobs);
-		mCompatibilityManager.registerPlugin(HerobrineCompat.class, CompatPlugin.Herobrine);
 
 		mCompatibilityManager.registerPlugin(ExtraHardModeCompat.class, CompatPlugin.ExtraHardMode);
 		mCompatibilityManager.registerPlugin(CrackShotCompat.class, CompatPlugin.CrackShot);

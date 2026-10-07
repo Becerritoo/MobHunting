@@ -45,7 +45,6 @@
 		<LevelledMobs.version>3.4.1</LevelledMobs.version>
 		<MysteriousHalloween.version>1.3.3</MysteriousHalloween.version>
 		<EliteMobs.version>6.5.0</EliteMobs.version>
-		<Herobrine.version>2.1.1</Herobrine.version>
 		<towny.version>0.91.4.2</towny.version>
 		<residence.version>4.7.0.2</residence.version>
 		<MobStacker.version>2.0.0</MobStacker.version>
@@ -495,19 +494,6 @@
 			<groupId>com.magmaguy</groupId>
 			<artifactId>EliteMobs</artifactId>
 			<version>${EliteMobs.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- Herobrine -->
-		<dependency>
-			<groupId>net.theprogrammersworld.herobrine.Herobrine</groupId>
-			<artifactId>Herobrine</artifactId>
-			<version>${Herobrine.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>

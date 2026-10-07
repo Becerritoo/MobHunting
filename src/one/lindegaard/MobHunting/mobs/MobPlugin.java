@@ -8,7 +8,6 @@ import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
-import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -74,7 +73,7 @@ public enum MobPlugin {
 		case InfernalMobs:
 			return InfernalMobsCompat.isSupported();
 		case Herobrine:
-			return HerobrineCompat.isSupported();
+			return false;
 		case EliteMobs:
 			return EliteMobsCompat.isSupported();
 		case Boss:
