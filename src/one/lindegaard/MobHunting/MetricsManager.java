@@ -35,8 +35,6 @@ import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat.FactionsVersion;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
 import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
-import one.lindegaard.MobHunting.compatibility.HologramsCompat;
-import one.lindegaard.MobHunting.compatibility.HolographicDisplaysCompat;
 import one.lindegaard.MobHunting.compatibility.IDisguiseCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
@@ -240,8 +238,6 @@ public class MetricsManager {
 				valueMap.put("ActionBar", ActionbarCompat.isSupported() ? 1 : 0);
 				valueMap.put("ActionBarAPI", ActionBarAPICompat.isSupported() ? 1 : 0);
 				valueMap.put("ActionAnnouncer", ActionAnnouncerCompat.isSupported() ? 1 : 0);
-				valueMap.put("Holograms", HologramsCompat.isSupported() ? 1 : 0);
-				valueMap.put("Holographic Display", HolographicDisplaysCompat.isSupported() ? 1 : 0);
 				valueMap.put("CMIHolograms", CMICompat.isSupported() ? 1 : 0);
 				return valueMap;
 			}

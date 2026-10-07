@@ -43,8 +43,6 @@ import one.lindegaard.MobHunting.HologramManager;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.StatType;
 import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
-import one.lindegaard.MobHunting.compatibility.HologramsCompat;
-import one.lindegaard.MobHunting.compatibility.HolographicDisplaysCompat;
 import one.lindegaard.MobHunting.storage.StatStore;
 import one.lindegaard.MobHunting.storage.TimePeriod;
 
@@ -99,8 +97,7 @@ public class LeaderboardManager implements Listener {
 						mLegacyLeaderboards.size() + mLeaderboards.size());
 			}
 
-			if (HologramsCompat.isSupported() || HolographicDisplaysCompat.isSupported()
-					|| (CMICompat.isSupported()) && CMI.getInstance() != null && CMI.getInstance().isFullyLoaded()) {
+			if (CMICompat.isSupported() && CMI.getInstance() != null && CMI.getInstance().isFullyLoaded()) {
 				for (HologramLeaderboard board : hologramManager.getHolograms().values())
 					board.update();
 				plugin.getMessages().debug("Refreshed %s holograms.", hologramManager.getHolograms().size());

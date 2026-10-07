@@ -568,14 +568,6 @@ public class ConfigManager extends AutoConfig {
 		setCategoryComment("plugins.boss", "########################################################################"
 				+ "\nBoss" + "\n########################################################################");
 
-		setCategoryComment("plugins.holograms",
-				"########################################################################" + "\nHolograms"
-						+ "\n########################################################################");
-
-		setCategoryComment("plugins.holographic_displays",
-				"########################################################################" + "\nHolograpic Displays"
-						+ "\n########################################################################");
-
 		setCategoryComment("plugins.precious_stones",
 				"########################################################################" + "\nPrecious Stones"
 						+ "\n########################################################################");
@@ -4798,14 +4790,6 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "boss.enable_integration_boss", category = "plugins", comment = "Enable/Disable integration with Boss."
 			+ "\nhttps://")
 	public boolean enableIntegrationBoss = true;
-
-	@ConfigField(name = "holograms.enable_integration_holograms", category = "plugins", comment = "Enable/Disable integration with Holograms."
-			+ "\nhttps://www.spigotmc.org/resources/holograms.4924/")
-	public boolean enableIntegrationHolograms = true;
-
-	@ConfigField(name = "holographic_displays.enable_integration_holographic_displays", category = "plugins", comment = "Enable/Disable integration with Holograms."
-			+ "\nhttps://dev.bukkit.org/projects/holographic_displays")
-	public boolean enableIntegrationHolographicDisplays = true;
 
 	@ConfigField(name = "precious_stones.enable_integration_preciousstones", category = "plugins", comment = "Enable/Disable integration with PreciousStones."
 			+ "\nhttps://www.spigotmc.org/resources/preciousstones.5270/")

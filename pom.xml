@@ -722,31 +722,6 @@
 		</dependency>
 
 		<!-- Holograms -->
-		<dependency>
-			<groupId>com.sainttx.holograms</groupId>
-			<artifactId>HologramPlugin</artifactId>
-			<version>${holograms.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- HologramDisplays -->
-		<dependency>
-			<groupId>com.gmail.filoghost.holographicdisplays</groupId>
-			<artifactId>HolographicDisplays</artifactId>
-			<version>${hologramdisplays.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<!-- CMI Holograms -->
 		<dependency>
 			<groupId>com.Zrips.CMI</groupId>

@@ -50,8 +50,6 @@ import one.lindegaard.MobHunting.compatibility.ExtraHardModeCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
 import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
-import one.lindegaard.MobHunting.compatibility.HologramsCompat;
-import one.lindegaard.MobHunting.compatibility.HolographicDisplaysCompat;
 import one.lindegaard.MobHunting.compatibility.IDisguiseCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
@@ -256,8 +254,6 @@ public class MobHunting extends JavaPlugin {
 		mCompatibilityManager.registerPlugin(WorldEditCompat.class, CompatPlugin.WorldEdit);
 		mCompatibilityManager.registerPlugin(WorldGuardCompat.class, CompatPlugin.WorldGuard);
 
-		mCompatibilityManager.registerPlugin(HologramsCompat.class, CompatPlugin.Holograms);
-		mCompatibilityManager.registerPlugin(HolographicDisplaysCompat.class, CompatPlugin.HolographicDisplays);
 		mCompatibilityManager.registerPlugin(CMICompat.class, CompatPlugin.CMI);
 		mCompatibilityManager.registerPlugin(CMILibCompat.class, CompatPlugin.CMILib);
 		mCompatibilityManager.registerPlugin(FactionsHelperCompat.class, CompatPlugin.Factions);
@@ -322,12 +318,7 @@ public class MobHunting extends JavaPlugin {
 		mCommandDispatcher.registerCommand(new DatabaseCommand(this));
 		mCommandDispatcher.registerCommand(new HeadCommand(this));
 		mCommandDispatcher.registerCommand(new LeaderboardCommand(this));
-		// if (HolographicDisplaysCompat.isSupported() || HologramsCompat.isSupported()
-		// || CMICompat.isSupported())
 		mCommandDispatcher.registerCommand(new HologramCommand(this));
-		// else
-		// getMessages().debug("/mh Hologram command not supported. No Hologram plugin
-		// was found.");
 		mCommandDispatcher.registerCommand(new LearnCommand(this));
 		mCommandDispatcher.registerCommand(new MuteCommand(this));
 		// moved to CitizensCompat
