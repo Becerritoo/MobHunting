@@ -404,12 +404,6 @@ public class ConfigManager extends AutoConfig {
 						+ "\nHere you can chance the behavior of stacked mobs integration, or you can disable"
 						+ "\nintegration completely.");
 
-		setCategoryComment("plugins.custommobs",
-				"########################################################################" + "\nCustomMob settings"
-						+ "\n########################################################################"
-						+ "\nHere you can chance the behavior of CustomMobs Integration, or you can disable"
-						+ "\nintegration completely." + "\nhttps://www.spigotmc.org/resources/custommobs.7339/");
-
 		setCategoryComment("plugins.infernalmobs",
 				"########################################################################" + "\nInfernalMobs settings"
 						+ "\n########################################################################"
@@ -3957,16 +3951,6 @@ public class ConfigManager extends AutoConfig {
 
 	@ConfigField(name = "get_reward_from_stacked_mobs", category = "plugins.stackedmobs", comment = "Set to true if you want stacked mobs to pay a reward.")
 	public boolean getRewardFromStackedMobs = true;
-
-	// #####################################################################################
-	// CustomMobs Settings
-	// #####################################################################################
-	@ConfigField(name = "enable_integration_custommobs", category = "plugins.custommobs", comment = "Enable/disable integration with CustomMobs"
-			+ "\nhttps://dev.bukkit.org/bukkit_plugins/custom_mobs/")
-	public boolean enableIntegrationCustomMobs = true;
-
-	@ConfigField(name = "allow_custom_mobspawners_and_eggs", category = "plugins.custommobs", comment = "Can the players earn money on mobs spawned from CustomMobs Spawners and eggs?")
-	public boolean allowCustomMobsSpawners = false;
 
 	// #####################################################################################
 	// InfernalMobs Settings

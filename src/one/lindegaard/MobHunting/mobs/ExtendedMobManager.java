@@ -16,7 +16,6 @@ import one.lindegaard.CustomItemsLib.storage.DataStoreException;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
@@ -40,8 +39,6 @@ public class ExtendedMobManager {
 			plugin.getStoreManager().insertMissingCitizensMobs();
 		if (MythicMobsCompat.isSupported())
 			plugin.getStoreManager().insertMissingMythicMobs();
-		if (CustomMobsCompat.isSupported())
-			plugin.getStoreManager().insertCustomMobs();
 		if (TARDISWeepingAngelsCompat.isSupported())
 			plugin.getStoreManager().insertTARDISWeepingAngelsMobs();
 		if (MysteriousHalloweenCompat.isSupported())
@@ -76,9 +73,7 @@ public class ExtendedMobManager {
 				break;
 
 			case CustomMobs:
-				if (!CustomMobsCompat.isSupported() || !CustomMobsCompat.isEnabledInConfig())
-					continue;
-				break;
+				continue;
 
 			case TARDISWeepingAngels:
 				if (!TARDISWeepingAngelsCompat.isSupported() || !TARDISWeepingAngelsCompat.isEnabledInConfig())
@@ -183,9 +178,6 @@ public class ExtendedMobManager {
 				mobtype = TARDISWeepingAngelsCompat.getWeepingAngelMonsterType(entity).name();
 			else
 				mobtype = "unknown";
-		} else if (CustomMobsCompat.isCustomMob(entity)) {
-			mobPlugin = MobPlugin.CustomMobs;
-			mobtype = CustomMobsCompat.getCustomMobType(entity);
 		} else if (MysteriousHalloweenCompat.isMysteriousHalloween(entity)) {
 			mobPlugin = MobPlugin.MysteriousHalloween;
 			if (MysteriousHalloweenCompat.getMysteriousHalloweenType(entity) != null)

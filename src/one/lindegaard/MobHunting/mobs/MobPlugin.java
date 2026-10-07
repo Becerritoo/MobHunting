@@ -6,7 +6,6 @@ import org.bukkit.command.ConsoleCommandSender;
 
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
@@ -61,7 +60,7 @@ public enum MobPlugin {
 		case Citizens:
 			return CitizensCompat.isSupported();
 		case CustomMobs:
-			return CustomMobsCompat.isSupported();
+			return false;
 		case MysteriousHalloween:
 			return MysteriousHalloweenCompat.isSupported();
 		case MythicMobs:

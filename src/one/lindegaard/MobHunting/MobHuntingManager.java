@@ -238,15 +238,6 @@ public class MobHuntingManager implements Listener {
 						.debug("Permission mobhunting.mobs.'" + permission_postfix + "' not set, defaulting to True.");
 				return true;
 			}
-		} else if (CustomMobsCompat.isCustomMob(mob)) {
-			permission_postfix = CustomMobsCompat.getCustomMobType(mob);
-			if (player.isPermissionSet("mobhunting.mobs." + permission_postfix))
-				return player.hasPermission("mobhunting.mobs." + permission_postfix);
-			else {
-				plugin.getMessages()
-						.debug("Permission mobhunting.mobs.'" + permission_postfix + "' not set, defaulting to True.");
-				return true;
-			}
 		} else if (MysteriousHalloweenCompat.isMysteriousHalloween(mob)) {
 			permission_postfix = "npc-" + MysteriousHalloweenCompat.getMysteriousHalloweenType(mob);
 			if (player.isPermissionSet("mobhunting.mobs." + permission_postfix))

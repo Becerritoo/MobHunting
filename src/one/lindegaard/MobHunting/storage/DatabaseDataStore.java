@@ -18,7 +18,6 @@ import one.lindegaard.MobHunting.bounty.Bounty;
 import one.lindegaard.MobHunting.bounty.BountyStatus;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -904,45 +903,6 @@ public abstract class DatabaseDataStore implements IDataStore {
 	}
 
 	@Override
-	public void insertCustomMobs() {
-		int n = 0;
-		try {
-			Connection mConnection = setupConnection();
-			Statement statement = mConnection.createStatement();
-			for (String mob : CustomMobsCompat.getMobRewardData().keySet())
-				if (plugin.getExtendedMobManager().getMobIdFromMobTypeAndPluginID(mob, MobPlugin.CustomMobs) == 0) {
-					statement.executeUpdate("INSERT INTO mh_Mobs (PLUGIN_ID, MOBTYPE) VALUES (4,'" + mob + "')");
-					n++;
-				}
-			if (n > 0)
-				Bukkit.getConsoleSender().sendMessage(
-						ChatColor.GOLD + "[MobHunting] " + ChatColor.RESET + n + " CustomMobs was inserted to mh_Mobs");
-			statement.close();
-			mConnection.commit();
-			mConnection.close();
-		} catch (SQLException | DataStoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void insertCustomMobs(String mob) {
-		if (getMobIdFromExtendedMobType(mob, MobPlugin.CustomMobs) == 0)
-			try {
-				Connection mConnection = setupConnection();
-				Statement statement = mConnection.createStatement();
-				statement.executeUpdate("INSERT INTO mh_Mobs (PLUGIN_ID, MOBTYPE) VALUES (4,'" + mob + "')");
-				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting] " + ChatColor.RESET
-						+ "CustomMobs MobType " + mob + " was inserted to mh_Mobs");
-				statement.close();
-				mConnection.commit();
-				mConnection.close();
-			} catch (SQLException | DataStoreException e) {
-				e.printStackTrace();
-			}
-	}
-
-	@Override
 	public void insertMysteriousHalloweenMobs() {
 		int n = 0;
 		try {
@@ -1255,9 +1215,7 @@ public abstract class DatabaseDataStore implements IDataStore {
 						continue;
 					break;
 				case CustomMobs:
-					if (!CustomMobsCompat.isSupported() || !CustomMobsCompat.isEnabledInConfig())
-						continue;
-					break;
+					continue;
 				case MythicMobs:
 					if (!MythicMobsCompat.isSupported() || !MythicMobsCompat.isEnabledInConfig())
 						continue;

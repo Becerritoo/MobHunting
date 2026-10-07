@@ -25,7 +25,6 @@ import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CrackShotCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EssentialsCompat;
 import one.lindegaard.MobHunting.compatibility.ExtraHardModeCompat;
@@ -193,7 +192,6 @@ public class MetricsManager {
 				valueMap.put("MythicMobs", MythicMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("TARDISWeepingAngels", TARDISWeepingAngelsCompat.isSupported() ? 1 : 0);
 				valueMap.put("MobStacker", MobStackerCompat.isSupported() ? 1 : 0);
-				valueMap.put("CustomMobs", CustomMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("Levelled Mobs", LevelledMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("StackMob", StackMobCompat.isSupported() ? 1 : 0);
 				valueMap.put("MysteriousHalloween", MysteriousHalloweenCompat.isSupported() ? 1 : 0);

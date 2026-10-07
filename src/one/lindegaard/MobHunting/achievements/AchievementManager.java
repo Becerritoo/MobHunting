@@ -23,7 +23,6 @@ import one.lindegaard.CustomItemsLib.storage.IDataCallback;
 import one.lindegaard.CustomItemsLib.storage.UserNotFoundException;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
@@ -165,19 +164,6 @@ public class AchievementManager implements Listener {
 		if (MysteriousHalloweenCompat.isSupported())
 			for (String type : MysteriousHalloweenCompat.getMobRewardData().keySet()) {
 				ExtendedMob extendedMob = new ExtendedMob(MobPlugin.MysteriousHalloween, type);
-				registerAchievement(new BasicHuntAchievement(plugin, extendedMob));
-				registerAchievement(new SecondHuntAchievement(plugin, extendedMob));
-				registerAchievement(new ThirdHuntAchievement(plugin, extendedMob));
-				registerAchievement(new FourthHuntAchievement(plugin, extendedMob));
-				registerAchievement(new FifthHuntAchievement(plugin, extendedMob));
-				registerAchievement(new SixthHuntAchievement(plugin, extendedMob));
-				registerAchievement(new SeventhHuntAchievement(plugin, extendedMob));
-				registerAchievement(new EighthHuntAchievement(plugin, extendedMob));
-			}
-
-		if (CustomMobsCompat.isSupported())
-			for (String type : CustomMobsCompat.getMobRewardData().keySet()) {
-				ExtendedMob extendedMob = new ExtendedMob(MobPlugin.CustomMobs, type);
 				registerAchievement(new BasicHuntAchievement(plugin, extendedMob));
 				registerAchievement(new SecondHuntAchievement(plugin, extendedMob));
 				registerAchievement(new ThirdHuntAchievement(plugin, extendedMob));

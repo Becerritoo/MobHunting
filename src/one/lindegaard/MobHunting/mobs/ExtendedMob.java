@@ -13,7 +13,6 @@ import one.lindegaard.CustomItemsLib.rewards.CoreCustomItems;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
@@ -107,10 +106,7 @@ public class ExtendedMob {
 			else
 				return mobtype;
 		case CustomMobs:
-			if (CustomMobsCompat.getMobRewardData().containsKey(mobtype))
-				return CustomMobsCompat.getMobRewardData().get(mobtype).getMobName();
-			else
-				return mobtype;
+			return mobtype;
 		case MysteriousHalloween:
 			if (MysteriousHalloweenCompat.getMobRewardData().containsKey(mobtype))
 				return MysteriousHalloweenCompat.getMobRewardData().get(mobtype).getMobName();
@@ -162,7 +158,7 @@ public class ExtendedMob {
 		case TARDISWeepingAngels:
 			return TARDISWeepingAngelsCompat.getProgressAchievementLevel1(mobtype);
 		case CustomMobs:
-			return CustomMobsCompat.getProgressAchievementLevel1(mobtype);
+			return 0;
 		case SmartGiants:
 			return 0;
 		case InfernalMobs:

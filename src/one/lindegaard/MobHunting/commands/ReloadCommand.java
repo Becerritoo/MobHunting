@@ -12,7 +12,6 @@ import one.lindegaard.MobHunting.Messages;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
-import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
@@ -94,8 +93,6 @@ public class ReloadCommand implements ICommand {
 				MythicMobsCompat.loadMythicMobsData();
 			if (TARDISWeepingAngelsCompat.isSupported())
 				TARDISWeepingAngelsCompat.loadTARDISWeepingAngelsMobsData();
-			if (CustomMobsCompat.isSupported())
-				CustomMobsCompat.loadCustomMobsData();
 			if (MysteriousHalloweenCompat.isSupported())
 				MysteriousHalloweenCompat.loadMysteriousHalloweenMobsData();
 			if (CitizensCompat.isSupported())

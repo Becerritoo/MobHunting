@@ -144,10 +144,6 @@ public interface IDataStore {
 
 	void insertMysteriousHalloweenMobs(String mob);
 
-	void insertCustomMobs();
-
-	void insertCustomMobs(String mob);
-
 	void insertInfernalMobs();
 
 	void insertEliteMobs();

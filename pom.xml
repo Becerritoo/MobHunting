@@ -29,7 +29,6 @@
 		<PreciousStones.version>10.7.2</PreciousStones.version>
 		<libsdisguises.version>10.0.28</libsdisguises.version>
 		<battleArena.version>3.9.16.4</battleArena.version>
-		<custommobs.version>4.17</custommobs.version>
 		<mobarena.version>0.104.2</mobarena.version>
 		<massivecore.version>2.14.0</massivecore.version>
 		<factions.version>2.14.0</factions.version>
@@ -606,19 +605,6 @@
 			<artifactId>MythicMobs</artifactId>
 			<version>${mythicmobs2.version}</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<!-- CustomMobs -->
-		<dependency>
-			<groupId>de.hellfirepvp</groupId>
-			<artifactId>CustomMobs</artifactId>
-			<version>${custommobs.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- InfernalMobs -->
