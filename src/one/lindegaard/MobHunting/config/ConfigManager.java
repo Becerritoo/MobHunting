@@ -3930,12 +3930,6 @@ public class ConfigManager extends AutoConfig {
 	// #####################################################################################
 	// Disguises
 	// #####################################################################################
-	@ConfigField(name = "enable_integration_i_disguise", category = "plugins.disguises", comment = "Enable/disable integration with iDisguise")
-	public boolean enableIntegrationIDisguise = true;
-
-	@ConfigField(name = "enable_integration_disguisecraft", category = "plugins.disguises", comment = "Enable/disable integration with DisguiseCcraft")
-	public boolean enableIntegrationDisguiseCraft = true;
-
 	@ConfigField(name = "enable_integration_libsdisguises", category = "plugins.disguises", comment = "Enable/disable integration with LibsDisguises")
 	public boolean enableIntegrationLibsDisguises = true;
 

@@ -26,7 +26,6 @@ import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CrackShotCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
-import one.lindegaard.MobHunting.compatibility.DisguiseCraftCompat;
 import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.EssentialsCompat;
 import one.lindegaard.MobHunting.compatibility.ExtraHardModeCompat;
@@ -34,7 +33,6 @@ import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat;
 import one.lindegaard.MobHunting.compatibility.FactionsHelperCompat.FactionsVersion;
 import one.lindegaard.MobHunting.compatibility.GringottsCompat;
 import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
-import one.lindegaard.MobHunting.compatibility.IDisguiseCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LibsDisguisesCompat;
@@ -155,18 +153,6 @@ public class MetricsManager {
 					@Override
 					public Map<String, Integer> call() throws Exception {
 						Map<String, Integer> valueMap = new HashMap<>();
-						try {
-							@SuppressWarnings({ "rawtypes", "unused" })
-							Class cls = Class.forName("pgDev.bukkit.DisguiseCraft.disguise.DisguiseType");
-							valueMap.put("DisguiseCraft", DisguiseCraftCompat.isSupported() ? 1 : 0);
-						} catch (ClassNotFoundException e) {
-						}
-						try {
-							@SuppressWarnings({ "rawtypes", "unused" })
-							Class cls = Class.forName("de.robingrether.idisguise.disguise.DisguiseType");
-							valueMap.put("iDisguise", IDisguiseCompat.isSupported() ? 1 : 0);
-						} catch (ClassNotFoundException e) {
-						}
 						try {
 							@SuppressWarnings({ "rawtypes", "unused" })
 							Class cls = Class.forName("me.libraryaddict.disguise.disguisetypes.DisguiseType");

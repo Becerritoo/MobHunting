@@ -35,11 +35,9 @@
 		<factions.version>2.14.0</factions.version>
 		<factionsuuid.version>1.6.9.5-U0.3.0</factionsuuid.version>
 
-		<iDisguise.version>5.6.1</iDisguise.version>
 		<vanishnopacket.version>3.20</vanishnopacket.version>
 		<mcmmo160version>1.6.0</mcmmo160version>
 		<mcmmo210.version>2.1.211</mcmmo210.version>
-		<disguisecraft.version>5.1</disguisecraft.version>
 		<crackshot.version>0.98.5</crackshot.version>
 		<WeaponMechanics.version>4.0.6</WeaponMechanics.version>
 		<PvpArena.version>2.0.0</PvpArena.version>
@@ -532,32 +530,6 @@
 			<groupId>org.mineacademy.boss</groupId>
 			<artifactId>Boss</artifactId>
 			<version>${boss.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- iDisguise -->
-		<dependency>
-			<groupId>de.robingrether.idisguise</groupId>
-			<artifactId>iDisguise</artifactId>
-			<version>${iDisguise.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- DisguiseCraft -->
-		<dependency>
-			<groupId>pgDev.bukkit.DisguiseCraft</groupId>
-			<artifactId>DisguiseCraft</artifactId>
-			<version>${disguisecraft.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>
