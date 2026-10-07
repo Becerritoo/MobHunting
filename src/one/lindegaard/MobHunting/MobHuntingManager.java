@@ -154,10 +154,6 @@ public class MobHuntingManager implements Listener {
 	private void registerHuntingModifiers() {
 		mHuntingModifiers.add(new BonusMobBonus());
 		mHuntingModifiers.add(new BrawlerBonus());
-		if (ConquestiaMobsCompat.isSupported())
-			mHuntingModifiers.add(new ConquestiaBonus());
-		if (LorinthsRpgMobsCompat.isSupported())
-			mHuntingModifiers.add(new LorinthsBonus());
 		if (LevelledMobsCompat.isSupported())
 			mHuntingModifiers.add(new LevelledMobsBonus());
 		mHuntingModifiers.add(new CoverBlown());

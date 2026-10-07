@@ -5,7 +5,7 @@ description: MobHunting adds a new level of fun to hunting monsters. Now you can
 dev-url: https://dev.bukkit.org/projects/mobhunting
 authors: [Rocologo, Becerritoo]
 depend: [CustomItemsLib]
-softdepend: [Vault, Reserve, Multiverse-Core, Essentials, BagOfGold, BetterRevive, WorldEdit, WorldGuard, PreciousStones, CMI, CMILib, Factions, Towny, Residence, ProtocolLib, mcMMO, MythicMobs, TARDISWeepingAngels, InfernalMobs, Boss, Citizens, Sentry, Sentinel, Minigames, MinigamesLib, MyPet, MobArena, PVPArena, BattleArena, LibsDisguises, DisguiseCraft, iDisguise, VanishNoPacket, BossBarAPI, BarAPI, ActionBar, TitleAPI, TitleManager, PlaceholderAPI, MobStacker, Gringotts, ActionBarAPI, ActionAnnouncer, CustomMobs, ConquestiaMobs, LevelledMobs, StackMob, MysteriousHalloween, SmartGiants, ExtraHardMode, CrackShot, WeaponMechanics]
+softdepend: [Vault, Reserve, Multiverse-Core, Essentials, BagOfGold, BetterRevive, WorldEdit, WorldGuard, PreciousStones, CMI, CMILib, Factions, Towny, Residence, ProtocolLib, mcMMO, MythicMobs, TARDISWeepingAngels, InfernalMobs, Boss, Citizens, Sentry, Sentinel, Minigames, MinigamesLib, MyPet, MobArena, PVPArena, BattleArena, LibsDisguises, DisguiseCraft, iDisguise, VanishNoPacket, BossBarAPI, BarAPI, ActionBar, TitleAPI, TitleManager, PlaceholderAPI, MobStacker, Gringotts, ActionBarAPI, ActionAnnouncer, CustomMobs, LevelledMobs, StackMob, MysteriousHalloween, SmartGiants, ExtraHardMode, CrackShot, WeaponMechanics]
 api-version: 1.21
 
 commands:

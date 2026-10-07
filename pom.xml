@@ -44,8 +44,6 @@
 		<WeaponMechanics.version>4.0.6</WeaponMechanics.version>
 		<PvpArena.version>2.0.0</PvpArena.version>
 		<TARDISWeepingAngels.version>4.1.1</TARDISWeepingAngels.version>
-		<ConquestiaMobs.version>3.3.3</ConquestiaMobs.version>
-		<LorinthsRpgMobs.version>1.6.8</LorinthsRpgMobs.version>
 		<LevelledMobs.version>3.4.1</LevelledMobs.version>
 		<MysteriousHalloween.version>1.3.3</MysteriousHalloween.version>
 		<EliteMobs.version>6.5.0</EliteMobs.version>
@@ -448,27 +446,6 @@
 			<groupId>me.eccentric_nz.tardisweepingangels</groupId>
 			<artifactId>TARDISWeepingAngels</artifactId>
 			<version>${TARDISWeepingAngels.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- ConquestiaMobs -->
-		<dependency>
-			<groupId>com.conquestiamc.cqmobs</groupId>
-			<artifactId>CqMobs</artifactId>
-			<version>${ConquestiaMobs.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- LorinthsRpgMobs -->
-		<dependency>
-			<groupId>me.lorinth.rpgmobs</groupId>
-			<artifactId>LorinthsRpgMobs</artifactId>
-			<version>${LorinthsRpgMobs.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>

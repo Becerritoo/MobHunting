@@ -40,7 +40,6 @@ import one.lindegaard.MobHunting.compatibility.BattleArenaCompat;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.CompatibilityManager;
-import one.lindegaard.MobHunting.compatibility.ConquestiaMobsCompat;
 import one.lindegaard.MobHunting.compatibility.CrackShotCompat;
 import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.DisguiseCraftCompat;
@@ -54,7 +53,6 @@ import one.lindegaard.MobHunting.compatibility.IDisguiseCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LevelledMobsCompat;
 import one.lindegaard.MobHunting.compatibility.LibsDisguisesCompat;
-import one.lindegaard.MobHunting.compatibility.LorinthsRpgMobsCompat;
 import one.lindegaard.MobHunting.compatibility.McMMOCompat;
 import one.lindegaard.MobHunting.compatibility.McMMOHorses;
 import one.lindegaard.MobHunting.compatibility.MinigamesCompat;
@@ -284,8 +282,6 @@ public class MobHunting extends JavaPlugin {
 		// Plugins where the reward is a multiplier
 		mCompatibilityManager.registerPlugin(StackMobCompat.class, CompatPlugin.StackMob);
 		mCompatibilityManager.registerPlugin(MobStackerCompat.class, CompatPlugin.MobStacker);
-		mCompatibilityManager.registerPlugin(ConquestiaMobsCompat.class, CompatPlugin.ConquestiaMobs);
-		mCompatibilityManager.registerPlugin(LorinthsRpgMobsCompat.class, CompatPlugin.LorinthsRpgMobs);
 		mCompatibilityManager.registerPlugin(EliteMobsCompat.class, CompatPlugin.EliteMobs);
 		mCompatibilityManager.registerPlugin(BossCompat.class, CompatPlugin.Boss);
 		mCompatibilityManager.registerPlugin(LevelledMobsCompat.class, CompatPlugin.LevelledMobs);
