@@ -215,7 +215,6 @@ mobhunting.commands.money.sell=§aEladtad ${rewardname} ${money}§a pénzért.
 mobhunting.commands.money.sell.nobag=§4Neked nincs ${rewardname} §4az eladáshoz. 
 mobhunting.commands.money.take=§aAdmin elvett tőled ${money} ${rewardname}§a.
 mobhunting.commands.money.take-sender=§aElvettél egy ${rewardname} (${money}) ${player}§a játékostól 
-mobhunting.commands.money.no-bossshop=§4A BossShop plugin nincs telepítve erre a szerverre.
 mobhunting.commands.money.not-enough-money=§4Nincs ${money} ${rewardname}§4.
 mobhunting.commands.money.deposit=§aLetétbe helyezted ${money} ${rewardname} §aa bankba 
 mobhunting.commands.money.withdraw=§aVisszavontad ${money} ${rewardname} §aa bankot

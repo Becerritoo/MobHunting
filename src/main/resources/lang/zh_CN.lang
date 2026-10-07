@@ -213,7 +213,6 @@ mobhunting.commands.money.deposit=§a你存了 ${money} ${rewardname} §a在银�
 mobhunting.commands.money.description=§a${rewardname}§a 经济命令.
 mobhunting.commands.money.give=§a管理员给你 ${rewardname} (${money})
 mobhunting.commands.money.give-sender=§a你给 §a${player} a ${rewardname} (${money})
-mobhunting.commands.money.no-bossshop=§4这个服务器上没有安装BossShop.
 mobhunting.commands.money.not-enough-money=§4You don't have ${money} ${rewardname}§4.
 mobhunting.commands.money.not-enough-money-in-bank=§4你没有 ${money} ${rewardname} §4在银行里.
 mobhunting.commands.money.sell=§a你以${money} §a的价格卖出了 ${rewardname}.

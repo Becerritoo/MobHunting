@@ -314,19 +314,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- BossShop -->
-		<dependency>
-			<groupId>org.black_ixx</groupId>
-			<artifactId>BossShop</artifactId>
-			<version>${bossshop.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<!-- SpigetUpdate -->
 		<dependency>
 			<groupId>org.inventivetalent.spiget-update</groupId>

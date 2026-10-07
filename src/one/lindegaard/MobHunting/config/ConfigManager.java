@@ -557,10 +557,6 @@ public class ConfigManager extends AutoConfig {
 				"########################################################################" + "\nPlaceholderApi"
 						+ "\n########################################################################");
 
-		setCategoryComment("plugins.bossshop",
-				"########################################################################" + "\nBossShop"
-						+ "\n########################################################################");
-
 		setCategoryComment("plugins.extra_hard_mode",
 				"########################################################################" + "\nExtraHardMode"
 						+ "\n########################################################################");
@@ -4790,10 +4786,6 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "placeholderapi.enable_integration_placeholderapi", category = "plugins", comment = "Enable/Disable integration with PlaceholderAPI."
 			+ "\nhttps://www.spigotmc.org/resources/placeholderapi.6245/")
 	public boolean enableIntegrationPlaceholderAPI = true;
-
-	@ConfigField(name = "bossshop.enable_integration_bossshop", category = "plugins", comment = "Enable/Disable integration with BossShop."
-			+ "\nhttps://www.spigotmc.org/resources/bossshop_powerful_and_playerfriendly_chest_gui_shop_menu_plugin.222/")
-	public boolean enableIntegrationBossShop = true;
 
 	@ConfigField(name = "extra_hard_mode.enable_integration_extra_hard_mode", category = "plugins", comment = "Enable/Disable integration with ExtraHardmode."
 			+ "\nhttps://www.spigotmc.org/resources/extra_hard_mode.19673/")

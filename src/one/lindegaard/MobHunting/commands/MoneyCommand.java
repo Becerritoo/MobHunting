@@ -8,7 +8,6 @@ import one.lindegaard.CustomItemsLib.rewards.Reward;
 import one.lindegaard.CustomItemsLib.rewards.RewardType;
 import one.lindegaard.MobHunting.MobHunting;
 import one.lindegaard.MobHunting.compatibility.BagOfGoldCompat;
-import one.lindegaard.MobHunting.compatibility.BossShopCompat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -85,9 +84,7 @@ public class MoneyCommand implements ICommand {
 				ChatColor.GOLD + Core.getConfigManager().commandAlias + ChatColor.GREEN + " buy" + ChatColor.YELLOW
 						+ " <amount>" + ChatColor.WHITE
 						+ " - to buy some more gold with your money and put it into your "
-						+ Core.getConfigManager().bagOfGoldName.trim() + ".",
-				ChatColor.GOLD + Core.getConfigManager().commandAlias + ChatColor.GREEN + " shop" + ChatColor.WHITE
-						+ " - to open the MobHunting BossShop." };
+						+ Core.getConfigManager().bagOfGoldName.trim() + "." };
 	}
 
 	@Override
@@ -176,40 +173,7 @@ public class MoneyCommand implements ICommand {
 					.getString("mobhunting.commands.base.unknown_playername", "playername", args[0]));
 			return true;
 
-		} else if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
-			// /mh money shop - to open a shop, where the player can buy or sell
-			// "Bag of gold"
-
-			// MobHunting.registerPlugin(BossShopCompat.class, "BossShop");
-
-			String shopName = "dummy"; // args[1];
-
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				if (BossShopCompat.isSupported()) {
-					if (player.hasPermission("mobhunting.money.shop") || sender.hasPermission("mobhunting.money.*")) {
-						BossShopCompat.openShop(plugin, player);
-						return true;
-					} else {
-						plugin.getMessages().senderSendMessage(sender,
-								ChatColor.RED + plugin.getMessages().getString("mobhunting.commands.base.nopermission",
-										Core.PH_PERMISSION, "mobhunting.money.shop", "command", "shop"));
-						return true;
-					}
-				} else {
-					plugin.getMessages().senderSendMessage(sender,
-							ChatColor.RED + plugin.getMessages().getString("mobhunting.commands.money.no-bossshop"));
-					return true;
-				}
-			} else {
-				// not allowed in console
-				plugin.getMessages().senderSendMessage(sender, ChatColor.RED + plugin.getMessages()
-						.getString("mobhunting.commands.base.noconsole", "command", "'money shop'"));
-				return true;
-			}
-		}
-
-		else if (args.length >= 2 && args[0].equalsIgnoreCase("drop") || args[0].equalsIgnoreCase("place"))
+		} else if (args.length >= 2 && args[0].equalsIgnoreCase("drop") || args[0].equalsIgnoreCase("place"))
 
 		{
 			// /mh money drop <amount>

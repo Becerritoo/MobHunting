@@ -213,7 +213,6 @@ mobhunting.commands.money.deposit=§Wplaciles ${money} ${rewardname} §ado banku
 mobhunting.commands.money.description=§a${rewardname}§a komendy pieniedzy.
 mobhunting.commands.money.give=§aAdmin dal Ci ${rewardname} (${money})
 mobhunting.commands.money.give-sender=§aDales §a${player} ${rewardname} (${money})
-mobhunting.commands.money.no-bossshop=§4Plugin BossShop nie jest zainstalowany na serwerze.
 mobhunting.commands.money.not-enough-money=§4Nie masz ${money} ${rewardname}§4.
 mobhunting.commands.money.not-enough-money-in-bank=§4Nie masz ${money} ${rewardname} §4w banku.
 mobhunting.commands.money.sell=§aSprzedales ${rewardname}§a za}§a.

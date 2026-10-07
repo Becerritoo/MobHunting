@@ -215,7 +215,6 @@ mobhunting.commands.money.sell=§aYou sold a ${rewardname}§a money for ${money}
 mobhunting.commands.money.sell.nobag=§4You have no ${rewardname} §4to sell. 
 mobhunting.commands.money.take=§aAdmin has taken ${money} ${rewardname}§a from you.
 mobhunting.commands.money.take-sender=§aYou took a ${rewardname} (${money})§a from ${player} 
-mobhunting.commands.money.no-bossshop=§4The BossShop plugin is not installed on this server.
 mobhunting.commands.money.not-enough-money=§4You don't have ${money} ${rewardname}§4.
 mobhunting.commands.money.deposit=§aYou deposit ${money} ${rewardname} §ainto the bank 
 mobhunting.commands.money.withdraw=§aYou withdraw ${money} ${rewardname} §afrom the bank

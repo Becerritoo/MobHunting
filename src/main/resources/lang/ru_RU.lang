@@ -213,7 +213,6 @@ mobhunting.commands.money.deposit=§aВаш счет ${money} ${rewardname} §a�
 mobhunting.commands.money.description=§a${rewardname}§a денежные команды.
 mobhunting.commands.money.give=§aАдмин дал вам ${rewardname} (${money})
 mobhunting.commands.money.give-sender=§aВы дали §a${player} ${rewardname} (${money})
-mobhunting.commands.money.no-bossshop=§4BossShop не установлен на данном сервере.
 mobhunting.commands.money.not-enough-money=§4У вас нет ${money} ${rewardname}§4.
 mobhunting.commands.money.not-enough-money-in-bank=§4У вас нет ${money} ${rewardname} §4в Банке.
 mobhunting.commands.money.sell=§aВы продали ${rewardname}§a за ${money}§a.
