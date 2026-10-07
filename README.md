@@ -16,6 +16,8 @@ Minecraft or Paper version.
 
 See [changelog.txt](changelog.txt) for the complete history and
 [the 8.6.1 release notes](releases/v8.6.1.md) for compatibility and validation details.
+The [compatibility status](COMPATIBILITY.md) distinguishes integrations tested
+by the maintainer from integrations retained without current runtime validation.
 
 ### Build and compatibility
 
