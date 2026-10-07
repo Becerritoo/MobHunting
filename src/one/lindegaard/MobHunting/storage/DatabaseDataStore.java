@@ -23,7 +23,6 @@ import one.lindegaard.MobHunting.compatibility.EliteMobsCompat;
 import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 import one.lindegaard.MobHunting.mobs.MobPluginManager;
 import one.lindegaard.MobHunting.mobs.MobPlugin;
@@ -984,46 +983,6 @@ public abstract class DatabaseDataStore implements IDataStore {
 	}
 
 	@Override
-	public void insertSmartGiants() {
-		int n = 0;
-		try {
-			Connection mConnection = setupConnection();
-			Statement statement = mConnection.createStatement();
-			for (String mob : SmartGiantsCompat.getMobRewardData().keySet())
-				if (SmartGiantsCompat.isSmartGiants(mob)
-						&& getMobIdFromExtendedMobType(mob, MobPlugin.SmartGiants) == 0) {
-					statement.executeUpdate("INSERT INTO mh_Mobs (PLUGIN_ID, MOBTYPE) VALUES (6,'" + mob + "')");
-					n++;
-				}
-			if (n > 0)
-				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting] " + ChatColor.RESET + n
-						+ " SmartGiants was inserted to mh_Mobs");
-			statement.close();
-			mConnection.commit();
-			mConnection.close();
-		} catch (SQLException | DataStoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void insertSmartGiants(String mob) {
-		if (getMobIdFromExtendedMobType(mob, MobPlugin.SmartGiants) == 0)
-			try {
-				Connection mConnection = setupConnection();
-				Statement statement = mConnection.createStatement();
-				statement.executeUpdate("INSERT INTO mh_Mobs (PLUGIN_ID, MOBTYPE) VALUES (6,'" + mob + "')");
-				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting] " + ChatColor.RESET
-						+ "SmartGiants MobType " + mob + " was inserted to mh_Mobs");
-				statement.close();
-				mConnection.commit();
-				mConnection.close();
-			} catch (SQLException | DataStoreException e) {
-				e.printStackTrace();
-			}
-	}
-
-	@Override
 	public void insertInfernalMobs() {
 		Connection connection;
 		try {
@@ -1352,9 +1311,7 @@ public abstract class DatabaseDataStore implements IDataStore {
 						continue;
 					break;
 				case SmartGiants:
-					if (!SmartGiantsCompat.isSupported() || !SmartGiantsCompat.isEnabledInConfig())
-						continue;
-					break;
+					continue;
 				case Herobrine:
 					if (!HerobrineCompat.isSupported() || !HerobrineCompat.isEnabledInConfig())
 						continue;

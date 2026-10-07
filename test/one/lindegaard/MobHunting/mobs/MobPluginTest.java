@@ -10,6 +10,10 @@ public class MobPluginTest {
 	public void resolvesPersistedPluginIds() {
 		for (MobPlugin plugin : MobPlugin.values())
 			assertEquals(plugin, MobPlugin.fromId(plugin.getId()));
+
+		assertEquals(MobPlugin.CustomMobs, MobPlugin.fromId(4));
+		assertEquals(MobPlugin.SmartGiants, MobPlugin.fromId(6));
+		assertEquals(MobPlugin.Herobrine, MobPlugin.fromId(8));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

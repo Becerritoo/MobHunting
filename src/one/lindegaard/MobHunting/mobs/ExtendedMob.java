@@ -19,7 +19,6 @@ import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 
 public class ExtendedMob {
@@ -169,7 +168,7 @@ public class ExtendedMob {
 		case CustomMobs:
 			return CustomMobsCompat.getProgressAchievementLevel1(mobtype);
 		case SmartGiants:
-			return SmartGiantsCompat.getProgressAchievementLevel1(mobtype);
+			return 0;
 		case InfernalMobs:
 			return InfernalMobsCompat.getProgressAchievementLevel1(mobtype);
 		case Herobrine:

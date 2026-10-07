@@ -118,7 +118,6 @@ import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.MyPetCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 import one.lindegaard.MobHunting.mobs.ExtendedMobRewardData;
 
@@ -506,14 +505,6 @@ public class RewardManager {
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getRewardPrize());
 			plugin.getMessages().debug("MysteriousHalloween %s has no reward data",
 					MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name());
-			return 0;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return getPrice(mob, SmartGiantsCompat.getMobRewardData()
-						.get(SmartGiantsCompat.getSmartGiantsMobType(mob)).getRewardPrize());
-			plugin.getMessages().debug("SmartGiantsS %s has no reward data",
-					SmartGiantsCompat.getSmartGiantsMobType(mob));
 			return 0;
 
 		} else if (MyPetCompat.isMyPet(mob)) {
@@ -917,12 +908,6 @@ public class RewardManager {
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getConsoleRunCommand();
 			return new ArrayList<>();
 
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
-						.getConsoleRunCommand();
-			return new ArrayList<>();
-
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
 			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
 				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
@@ -1254,12 +1239,6 @@ public class RewardManager {
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getRewardDescription();
 			return "";
 
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
-						.getRewardDescription();
-			return "";
-
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
 			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
 				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
@@ -1581,12 +1560,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).getChance();
-			return 0;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
-						.getChance();
 			return 0;
 
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
@@ -1912,12 +1885,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name())
-						.getMcMMOSkillRewardChance();
-			return 0;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
 						.getMcMMOSkillRewardChance();
 			return 0;
 
@@ -2272,12 +2239,6 @@ public class RewardManager {
 						.getMcMMOSkillRewardAmount();
 			return 0;
 
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
-						.getMcMMOSkillRewardAmount();
-			return 0;
-
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
 			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
 				return HerobrineCompat.getMobRewardData().get(HerobrineCompat.getHerobrineMobType(mob))
@@ -2599,12 +2560,6 @@ public class RewardManager {
 					.containsKey(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()))
 				return MysteriousHalloweenCompat.getMobRewardData()
 						.get(MysteriousHalloweenCompat.getMysteriousHalloweenType(mob).name()).isMobEnabled();
-			return false;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(mob))
-						.isMobEnabled();
 			return false;
 
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
@@ -2937,14 +2892,6 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return false;
 
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return false;
-			// return
-			// SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(killed))
-			// .isMobEnabled();
-			return false;
-
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
 			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
 				return false;
@@ -3274,14 +3221,6 @@ public class RewardManager {
 				return 0;
 			// return MysteriousHalloweenCompat.getMobRewardData()
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
-			return 0;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return 0;
-			// return
-			// SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(killed))
-			// .isMobEnabled();
 			return 0;
 
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
@@ -3616,14 +3555,6 @@ public class RewardManager {
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
 			return "";
 
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return "";
-			// return
-			// SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(killed))
-			// .isMobEnabled();
-			return "";
-
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {
 			if (HerobrineCompat.getMobRewardData().containsKey(HerobrineCompat.getHerobrineMobType(mob)))
 				return "";
@@ -3955,14 +3886,6 @@ public class RewardManager {
 				return 0;
 			// return MysteriousHalloweenCompat.getMobRewardData()
 			// .get(MysteriousHalloweenCompat.getMysteriousHalloweenType(killed).name()).isMobEnabled();
-			return 0;
-
-		} else if (SmartGiantsCompat.isSmartGiants(mob)) {
-			if (SmartGiantsCompat.getMobRewardData().containsKey(SmartGiantsCompat.getSmartGiantsMobType(mob)))
-				return 0;
-			// return
-			// SmartGiantsCompat.getMobRewardData().get(SmartGiantsCompat.getSmartGiantsMobType(killed))
-			// .isMobEnabled();
 			return 0;
 
 		} else if (HerobrineCompat.isHerobrineMob(mob)) {

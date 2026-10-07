@@ -12,9 +12,12 @@ import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 
+/**
+ * Mob source identifiers stored in {@code mh_Mobs.PLUGIN_ID}. Existing IDs must
+ * remain stable, including entries for integrations that are no longer active.
+ */
 public enum MobPlugin {
 	Minecraft("Minecraft", 0), MythicMobs("MythicMobs", 1), Citizens("Citizens", 2), TARDISWeepingAngels(
 			"TARDISWeepingAngels", 3), CustomMobs("CustomMobs", 4), MysteriousHalloween("MysteriousHalloween",
@@ -65,7 +68,7 @@ public enum MobPlugin {
 		case MythicMobs:
 			return MythicMobsCompat.isSupported();
 		case SmartGiants:
-			return SmartGiantsCompat.isSupported();
+			return false;
 		case TARDISWeepingAngels:
 			return TARDISWeepingAngelsCompat.isSupported();
 		case InfernalMobs:

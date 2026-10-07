@@ -27,7 +27,6 @@ import one.lindegaard.MobHunting.compatibility.CustomMobsCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 import one.lindegaard.MobHunting.mobs.ExtendedMob;
 import one.lindegaard.MobHunting.mobs.MobPlugin;
@@ -124,8 +123,6 @@ public class AchievementManager implements Listener {
 		registerAchievement(new WolfKillAchievement(plugin));
 		if (Servers.isMC113OrNewer())
 			registerAchievement(new Neptune(plugin));
-		if (SmartGiantsCompat.isSupported())
-			registerAchievement(new DavidAndGoliath(plugin));
 
 		for (MobType type : MobType.values()) {
 			ExtendedMob extendedMob = new ExtendedMob(MobPlugin.Minecraft, type.name());
@@ -203,18 +200,6 @@ public class AchievementManager implements Listener {
 				registerAchievement(new SeventhHuntAchievement(plugin, extendedMob));
 				registerAchievement(new EighthHuntAchievement(plugin, extendedMob));
 			}
-
-		if (SmartGiantsCompat.isSupported()) {
-			ExtendedMob extendedMob = new ExtendedMob(MobPlugin.SmartGiants, SmartGiantsCompat.MONSTER_NAME);
-			registerAchievement(new BasicHuntAchievement(plugin, extendedMob));
-			registerAchievement(new SecondHuntAchievement(plugin, extendedMob));
-			registerAchievement(new ThirdHuntAchievement(plugin, extendedMob));
-			registerAchievement(new FourthHuntAchievement(plugin, extendedMob));
-			registerAchievement(new FifthHuntAchievement(plugin, extendedMob));
-			registerAchievement(new SixthHuntAchievement(plugin, extendedMob));
-			registerAchievement(new SeventhHuntAchievement(plugin, extendedMob));
-			registerAchievement(new EighthHuntAchievement(plugin, extendedMob));
-		}
 
 		if (InfernalMobsCompat.isSupported()) {
 			for (MobType type : MobType.values()) {

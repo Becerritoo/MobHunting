@@ -22,7 +22,6 @@ import one.lindegaard.MobHunting.compatibility.HerobrineCompat;
 import one.lindegaard.MobHunting.compatibility.InfernalMobsCompat;
 import one.lindegaard.MobHunting.compatibility.MysteriousHalloweenCompat;
 import one.lindegaard.MobHunting.compatibility.MythicMobsCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 
 public class ExtendedMobManager {
@@ -48,8 +47,6 @@ public class ExtendedMobManager {
 			plugin.getStoreManager().insertTARDISWeepingAngelsMobs();
 		if (MysteriousHalloweenCompat.isSupported())
 			plugin.getStoreManager().insertMysteriousHalloweenMobs();
-		if (SmartGiantsCompat.isSupported())
-			plugin.getStoreManager().insertSmartGiants();
 		if (HerobrineCompat.isSupported())
 			plugin.getStoreManager().insertHerobrineMobs();
 		if (EliteMobsCompat.isSupported())
@@ -103,9 +100,7 @@ public class ExtendedMobManager {
 				break;
 
 			case SmartGiants:
-				if (!SmartGiantsCompat.isSupported() || !SmartGiantsCompat.isEnabledInConfig())
-					continue;
-				break;
+				continue;
 
 			case InfernalMobs:
 				if (!InfernalMobsCompat.isSupported() || !InfernalMobsCompat.isEnabledInConfig())
@@ -202,9 +197,6 @@ public class ExtendedMobManager {
 				mobtype = MysteriousHalloweenCompat.getMysteriousHalloweenType(entity).name();
 			else
 				mobtype = "unknown";
-		} else if (SmartGiantsCompat.isSmartGiants(entity)) {
-			mobPlugin = MobPlugin.SmartGiants;
-			mobtype = SmartGiantsCompat.getSmartGiantsMobType(entity);
 		} else if (InfernalMobsCompat.isInfernalMob(entity)) {
 			mobPlugin = MobPlugin.InfernalMobs;
 			MobType mob = MobType.getMobType(entity);

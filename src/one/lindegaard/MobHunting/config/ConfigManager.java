@@ -535,10 +535,6 @@ public class ConfigManager extends AutoConfig {
 				"########################################################################" + "\nMysterousHalloween"
 						+ "\n########################################################################");
 
-		setCategoryComment("plugins.smartgiants",
-				"########################################################################" + "\nSmartGiants"
-						+ "\n########################################################################");
-
 		setCategoryComment("plugins.placeholderapi",
 				"########################################################################" + "\nPlaceholderApi"
 						+ "\n########################################################################");
@@ -3242,13 +3238,6 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "message", category = "achievements.specials.axe_murderer")
 	public String specialAxeMurdererCmdDesc = "";
 
-	@ConfigField(name = "money", category = "achievements.specials.david_and_goliath")
-	public double davidAndGoliat = 1000;
-	@ConfigField(name = "commands", category = "achievements.specials.david_and_goliath")
-	public String davidAndGoliatCmd = "give {player} diamond_helmet 1";
-	@ConfigField(name = "message", category = "achievements.specials.david_and_goliath")
-	public String davidAndGoliatCmdDesc = "You got 1000 and a Diamond Helmet for the kill";
-
 	@ConfigField(name = "money", category = "achievements.specials.recordhungry")
 	public double specialRecordHungry = 1000;
 	@ConfigField(name = "commands", category = "achievements.specials.recordhungry")
@@ -4743,10 +4732,6 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "mysterious_halloween.enable_integration_mysterious_halloween", category = "plugins", comment = "Enable/Disable integration with MysteriousHalloween."
 			+ "\nhttps://www.spigotmc.org/resources/mysterioushalloween.13059/")
 	public boolean enableIntegrationMysteriousHalloween = true;
-
-	@ConfigField(name = "smartgiants.enable_integration_smartgiants", category = "plugins", comment = "Enable/Disable integration with SmartGiants."
-			+ "\nhttps://www.spigotmc.org/threads/smartgiants.55208/")
-	public boolean enableIntegrationSmartGiants = true;
 
 	@ConfigField(name = "placeholderapi.enable_integration_placeholderapi", category = "plugins", comment = "Enable/Disable integration with PlaceholderAPI."
 			+ "\nhttps://www.spigotmc.org/resources/placeholderapi.6245/")

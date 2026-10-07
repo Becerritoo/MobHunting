@@ -50,7 +50,6 @@ import one.lindegaard.MobHunting.compatibility.PVPArenaCompat;
 import one.lindegaard.MobHunting.compatibility.PreciousStonesCompat;
 import one.lindegaard.CustomItemsLib.compatibility.ProtocolLibCompat;
 import one.lindegaard.MobHunting.compatibility.ResidenceCompat;
-import one.lindegaard.MobHunting.compatibility.SmartGiantsCompat;
 import one.lindegaard.MobHunting.compatibility.StackMobCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
 import one.lindegaard.CustomItemsLib.compatibility.TitleAPICompat;
@@ -199,7 +198,6 @@ public class MetricsManager {
 				valueMap.put("Levelled Mobs", LevelledMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("StackMob", StackMobCompat.isSupported() ? 1 : 0);
 				valueMap.put("MysteriousHalloween", MysteriousHalloweenCompat.isSupported() ? 1 : 0);
-				valueMap.put("SmartGiants", SmartGiantsCompat.isSupported() ? 1 : 0);
 				valueMap.put("InfernalMobs", InfernalMobsCompat.isSupported() ? 1 : 0);
 				valueMap.put("Herobrine", HerobrineCompat.isSupported() ? 1 : 0);
 				valueMap.put("EliteMobs", EliteMobsCompat.isSupported() ? 1 : 0);
