@@ -179,7 +179,11 @@ public class ExtendedMob {
 
 	public boolean matches(Entity entity) {
 		ExtendedMob mob = MobHunting.getInstance().getExtendedMobManager().getExtendedMobFromEntity(entity);
-		return mobtype.equalsIgnoreCase(mob.mobtype);
+		return matches(mob);
+	}
+
+	public boolean matches(ExtendedMob mob) {
+		return mob != null && mobPlugin == mob.mobPlugin && mobtype.equalsIgnoreCase(mob.mobtype);
 	}
 
 	public ItemStack getInventoryAchivementItem(String name, int amount, int money) {
