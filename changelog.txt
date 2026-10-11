@@ -1,3 +1,11 @@
+V8.7.0 (development)
+* Retire adapters for obsolete shops, holograms, disguises and mob plugins while preserving historical database IDs.
+* Resolve persisted mob plugin identities by stable ID so removed integrations cannot shift stored statistics.
+* Keep active integrations that are unavailable to the maintainer documented as not verified.
+* Isolate achievement progress by mob source, including InfernalMobs, to prevent prefixed kills from advancing vanilla achievements.
+* Update the required CustomItemsLib version to 1.3.0.
+* Verify startup and clean shutdown with and without BagOfGold 4.7.0 on Paper 1.21.11.
+
 V8.6.1 (2026-10-06)
 * Update the required CustomItemsLib version to 1.2.0.
 * Allow CMILib visual messages to be enabled independently while CMI remains disabled.
