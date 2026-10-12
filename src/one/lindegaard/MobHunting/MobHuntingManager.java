@@ -1672,6 +1672,7 @@ public class MobHuntingManager implements Listener {
 
 		cash = Tools.round(cash);
 		plugin.getMessages().debug("Reward rounded to %s", cash);
+		boolean assistedReward = info.getAssister() != null && plugin.getConfigManager().enableAssists;
 
 		// Check if there is a reward for this kill
 		if ((cash >= Core.getConfigManager().minimumReward && cash != 0)
@@ -1692,8 +1693,24 @@ public class MobHuntingManager implements Listener {
 				return;
 			}
 
+			if (cash <= -Core.getConfigManager().minimumReward && cash != 0) {
+				double assessedPenalty = assistedReward ? Tools.round(cash / 2) : cash;
+				OfflinePlayer chargedPlayer = assistedReward ? player : killer;
+				if (assessedPenalty > -Core.getConfigManager().minimumReward || assessedPenalty == 0) {
+					cash = 0;
+				} else if (chargedPlayer == null
+						|| !plugin.getEconomyManager().withdrawPlayer(chargedPlayer, -assessedPenalty)) {
+					plugin.getMessages().debug("Penalty rejected for %s (%s); recording the kill without cash",
+							chargedPlayer == null ? player.getName() : chargedPlayer.getName(),
+							plugin.getEconomyManager().format(assessedPenalty));
+					cash = 0;
+				} else {
+					cash = assessedPenalty;
+				}
+			}
+
 			// Record the kill in the Database
-			if (info.getAssister() == null || plugin.getConfigManager().enableAssists == false) {
+			if (!assistedReward) {
 				plugin.getMessages().debug("RecordKill: %s killed a %s (%s) Cash=%s", player.getName(),
 						mob.getMobName(), mob.getMobPlugin().name(), plugin.getEconomyManager().format(cash));
 				plugin.getDataStoreManager().recordKill(player, mob, killed.hasMetadata("MH:hasBonus"), cash);
@@ -1773,7 +1790,7 @@ public class MobHuntingManager implements Listener {
 			}
 
 			// Reward/Penalty for assisted kill
-			if (info.getAssister() == null || plugin.getConfigManager().enableAssists == false) {
+			if (!assistedReward) {
 				if (cash >= Core.getConfigManager().minimumReward && cash != 0) {
 					if (plugin.getConfigManager().dropMoneyOnGroup) {
 						plugin.getRewardManager().dropMoneyOnGround_RewardManager(killer, killed, killed.getLocation(),
@@ -1790,18 +1807,12 @@ public class MobHuntingManager implements Listener {
 								plugin.getEconomyManager().format(cash));
 					}
 				} else if (cash <= -Core.getConfigManager().minimumReward && cash != 0) {
-					plugin.getRewardManager().withdrawPlayer(killer, -cash);
-					// plugin.getMessages().debug("RecordCash: %s killed a %s
-					// (%s) Cash=%s",
-					// killer.getName(), mob.getName(),
-					// mob.getMobPlugin().name(), cash);
-					// plugin.getDataStoreManager().recordCash(killer, mob,
-					// killed.hasMetadata("MH:hasBonus"), cash);
 					plugin.getMessages().debug("%s got a penalty (%s)", killer.getName(),
 							plugin.getEconomyManager().format(cash));
 				}
 			} else {
-				cash = Tools.round(cash / 2);
+				if (cash > 0)
+					cash = Tools.round(cash / 2);
 				if (cash >= Core.getConfigManager().minimumReward & cash != 0) {
 					if (plugin.getConfigManager().dropMoneyOnGroup) {
 						if (MyPetCompat.isKilledByMyPet(killed))
@@ -1832,7 +1843,6 @@ public class MobHuntingManager implements Listener {
 									plugin.getEconomyManager().format(cash));
 					}
 				} else if (cash <= -Core.getConfigManager().minimumReward && cash != 0) {
-					plugin.getRewardManager().withdrawPlayer(player, -cash);
 					if (!MyPetCompat.isKilledByMyPet(killed) && !CitizensCompat.isNPC(killer))
 						onAssist(info.getAssister(), killer, killed, info.getLastAssistTime());
 					plugin.getMessages().debug("%s was assisted by %s. Reward/Penalty is only ½ (%s)", player.getName(),
@@ -2167,20 +2177,28 @@ public class MobHuntingManager implements Listener {
 			}
 			// plugin.getDataStoreManager().recordAssist(player, killer,
 			// mob, killed.hasMetadata("MH:hasBonus"), cash);
-			if (cash >= 0)
-				plugin.getRewardManager().depositPlayer(player, cash);
-			else
-				plugin.getRewardManager().withdrawPlayer(player, -cash);
+			boolean transactionSucceeded = cash >= 0 ? plugin.getRewardManager().depositPlayer(player, cash)
+					: plugin.getEconomyManager().withdrawPlayer(player, -cash);
+			if (!transactionSucceeded) {
+				plugin.getMessages().debug("Assist reward/penalty rejected for %s (%s)", player.getName(),
+						plugin.getEconomyManager().format(cash));
+				return;
+			}
 			// plugin.getMessages().debug("RecordCash: %s killed a %s (%s)
 			// Cash=%s",
 			// killer.getName(), mob.getName(),
 			// mob.getMobPlugin().name(), cash);
 			// plugin.getDataStoreManager().recordCash(killer, mob,
 			// killed.hasMetadata("MH:hasBonus"), cash);
-			plugin.getMessages().debug("%s got a on assist reward (%s)", player.getName(),
+			plugin.getMessages().debug("%s got an assist reward/penalty (%s)", player.getName(),
 					plugin.getEconomyManager().format(cash));
 
-			if (ks != 1.0)
+			if (cash < 0)
+				plugin.getMessages().playerActionBarMessageQueue(player, ChatColor.RED + "" + ChatColor.ITALIC
+						+ plugin.getMessages().getString("mobhunting.moneylost", "prize",
+								plugin.getEconomyManager().format(cash), "money",
+								plugin.getEconomyManager().format(cash), "killed", mob.getFriendlyName()));
+			else if (ks != 1.0)
 				plugin.getMessages().playerActionBarMessageQueue(player,
 						ChatColor.GREEN + "" + ChatColor.ITALIC
 								+ plugin.getMessages().getString("mobhunting.moneygain.assist", "prize",

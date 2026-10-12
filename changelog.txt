@@ -4,6 +4,7 @@ V8.7.0 (development)
 * Keep active integrations that are unavailable to the maintainer documented as not verified.
 * Isolate achievement progress by mob source, including InfernalMobs, to prevent prefixed kills from advancing vanilla achievements.
 * Update the required CustomItemsLib version to 1.3.0.
+* Record rejected kill and assist penalties with zero cash and suppress money-loss messages when the economy refuses the withdrawal.
 * Verify startup and clean shutdown with and without BagOfGold 4.7.0 on Paper 1.21.11.
 
 V8.6.1 (2026-10-06)
