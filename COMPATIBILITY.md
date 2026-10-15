@@ -1,19 +1,19 @@
 # Compatibility status
 
 MobHunting is developed for Paper 1.21.11. The status below reflects the
-plugins available in the maintainer's reference test environment. An
+plugins available in the maintainer's reference test environment for the 8.7.0 release. An
 integration marked as **not verified** is not necessarily incompatible; it has
 not been tested because the corresponding plugin is not installed.
 
 ## Available for 8.7.0 validation
 
 These integrations are present in the reference environment and form the
-supported test scope for the 8.7.0 development branch:
+supported test scope for the 8.7.0 release:
 
 | Integration | Reference plugin version | 8.7.0 status |
 | --- | --- | --- |
-| CustomItemsLib | 1.3.0-SNAPSHOT | Startup and shutdown verified with MobHunting alone and in the complete stack |
-| BagOfGold | 4.7.0-SNAPSHOT | Startup, shutdown and Vault provider selection verified |
+| CustomItemsLib | 1.3.0 | Startup and shutdown verified with MobHunting alone and in the complete stack |
+| BagOfGold | 4.7.0 | Startup, shutdown and Vault provider selection verified |
 | BetterRevive | 0.9.1 custom build | Adapter enabled; 13 attribution regression tests passed |
 | CMILib | 1.6.0.1 | Detected during startup; message integration retained |
 | Citizens | 2.0.41-b4134 | Adapter enabled and compatibility shutdown completed cleanly |

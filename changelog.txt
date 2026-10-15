@@ -1,4 +1,4 @@
-V8.7.0 (development)
+V8.7.0 (2026-10-15)
 * Retire adapters for obsolete shops, holograms, disguises and mob plugins while preserving historical database IDs.
 * Resolve persisted mob plugin identities by stable ID so removed integrations cannot shift stored statistics.
 * Keep active integrations that are unavailable to the maintainer documented as not verified.

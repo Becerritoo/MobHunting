@@ -10,23 +10,22 @@ This fork is maintained by [Becerritoo](https://github.com/Becerritoo) and conti
 work originally created by Rocologo. It focuses on current Paper releases, reliability and
 compatibility with the plugins in the MobHunting ecosystem.
 
-The current release is `8.6.1`, validated on Paper 1.21.11. Plugin releases follow
+The current release is `8.7.0`, validated on Paper 1.21.11. Plugin releases follow
 [Semantic Versioning](https://semver.org/); the MobHunting version does not mirror the
 Minecraft or Paper version.
 
-Version `8.7.0` is under development on `release/8.7.0`. This branch removes
+Version `8.7.0` removes
 adapters for obsolete integrations, preserves their historical database IDs
 and targets CustomItemsLib 1.3.0.
 
 See [changelog.txt](changelog.txt) for the complete history and
-[the 8.6.1 release notes](releases/v8.6.1.md) for compatibility and validation details.
+[the 8.7.0 release notes](releases/v8.7.0.md) for compatibility and validation details.
 The [compatibility status](COMPATIBILITY.md) distinguishes integrations tested
 by the maintainer from integrations retained without current runtime validation.
 
 ### Build and compatibility
 
-MobHunting 8.6.1 uses CustomItemsLib `1.2.0` and MyPet `4.0.4`.
-The 8.7.0 development branch uses CustomItemsLib `1.3.0-SNAPSHOT`.
+MobHunting 8.7.0 uses CustomItemsLib `1.3.0` and MyPet `4.0.4`.
 The inherited Spigot API dependency is `1.21.4-R0.1-SNAPSHOT`; runtime validation targets **Paper 1.21.11**.
 `api-version: 1.21` is plugin metadata, not a claim of validation on every Minecraft release.
 
