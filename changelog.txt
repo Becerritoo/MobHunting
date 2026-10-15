@@ -1,3 +1,9 @@
+V8.7.1 (2026-10-15)
+* Replace the abandoned Spiget updater with verified Hangar release checks and downloads.
+* Select only public, reviewed stable releases compatible with the exact Paper version.
+* Update the companion versions to CustomItemsLib 1.4.0 and BagOfGold 4.8.0.
+* Point plugin metadata to the maintained fork repository.
+
 V8.7.0 (2026-10-15)
 * Retire adapters for obsolete shops, holograms, disguises and mob plugins while preserving historical database IDs.
 * Resolve persisted mob plugin identities by stable ID so removed integrations cannot shift stored statistics.
