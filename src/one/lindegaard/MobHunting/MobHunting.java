@@ -78,7 +78,7 @@ import one.lindegaard.MobHunting.storage.DataStoreManager;
 import one.lindegaard.MobHunting.storage.IDataStore;
 import one.lindegaard.MobHunting.storage.MySQLDataStore;
 import one.lindegaard.MobHunting.storage.SQLiteDataStore;
-import one.lindegaard.MobHunting.update.SpigetUpdater;
+import one.lindegaard.MobHunting.update.HangarUpdater;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -123,7 +123,7 @@ public class MobHunting extends JavaPlugin {
 	public one.lindegaard.MobHunting.compatibility.BetterReviveCompat getBetterReviveCompat() {
 		return betterReviveCompat;
 	}
-	private SpigetUpdater mSpigetUpdater;
+	private HangarUpdater mHangarUpdater;
 
 	private boolean mInitialized = false;
 	public boolean disabling = false;
@@ -238,8 +238,8 @@ public class MobHunting extends JavaPlugin {
 			return;
 		}
 
-		mSpigetUpdater = new SpigetUpdater(this);
-		mSpigetUpdater.setCurrentJarFile(this.getFile().getName());
+		mHangarUpdater = new HangarUpdater(this);
+		mHangarUpdater.setCurrentJarFile(this.getFile().getName());
 
 		mStoreManager = new DataStoreManager(this, mStore);
 
@@ -347,8 +347,8 @@ public class MobHunting extends JavaPlugin {
 			}
 		}
 
-		// Check for new MobHuntig updates using Spiget.org
-		mSpigetUpdater.hourlyUpdateCheck(getServer().getConsoleSender(), mConfig.updateCheck, false);
+		// Check for new MobHunting updates using Hangar.
+		mHangarUpdater.hourlyUpdateCheck(getServer().getConsoleSender(), mConfig.updateCheck, false);
 
 		if (!Servers.isGlowstoneServer()) {
 			mMetricsManager = new MetricsManager(this);
@@ -567,8 +567,8 @@ public class MobHunting extends JavaPlugin {
 		return mCompatibilityManager;
 	}
 
-	public SpigetUpdater getSpigetUpdater() {
-		return mSpigetUpdater;
+	public HangarUpdater getHangarUpdater() {
+		return mHangarUpdater;
 	}
 
 	public EconomyManager getEconomyManager() {

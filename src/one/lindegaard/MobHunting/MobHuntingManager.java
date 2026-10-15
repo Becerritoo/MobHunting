@@ -19,7 +19,6 @@ import one.lindegaard.MobHunting.grinding.Area;
 import one.lindegaard.MobHunting.mobs.ExtendedMob;
 import one.lindegaard.MobHunting.modifier.*;
 import one.lindegaard.MobHunting.placeholder.PlaceHolderData;
-import one.lindegaard.MobHunting.update.SpigetUpdater;
 
 import org.bukkit.*;
 import org.bukkit.command.CommandException;
@@ -80,7 +79,7 @@ public class MobHuntingManager implements Listener {
 			new BukkitRunnable() {
 				@Override
 				public void run() {
-					new SpigetUpdater(plugin).checkForUpdate(player, true, false);
+					plugin.getHangarUpdater().checkForUpdate(player, true, false);
 				}
 			}.runTaskLater(plugin, 20L);
 		}
