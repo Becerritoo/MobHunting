@@ -14,12 +14,7 @@ import org.bukkit.Bukkit;
 
 import one.lindegaard.CustomItemsLib.HttpTools;
 import one.lindegaard.CustomItemsLib.HttpTools.httpCallback;
-import one.lindegaard.CustomItemsLib.compatibility.ActionAnnouncerCompat;
-import one.lindegaard.CustomItemsLib.compatibility.ActionBarAPICompat;
-import one.lindegaard.CustomItemsLib.compatibility.ActionbarCompat;
-import one.lindegaard.CustomItemsLib.compatibility.BarAPICompat;
 import one.lindegaard.MobHunting.compatibility.BattleArenaCompat;
-import one.lindegaard.CustomItemsLib.compatibility.BossBarAPICompat;
 import one.lindegaard.MobHunting.compatibility.BossCompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
@@ -50,8 +45,6 @@ import one.lindegaard.CustomItemsLib.compatibility.ProtocolLibCompat;
 import one.lindegaard.MobHunting.compatibility.ResidenceCompat;
 import one.lindegaard.MobHunting.compatibility.StackMobCompat;
 import one.lindegaard.MobHunting.compatibility.TARDISWeepingAngelsCompat;
-import one.lindegaard.CustomItemsLib.compatibility.TitleAPICompat;
-import one.lindegaard.CustomItemsLib.compatibility.TitleManagerCompat;
 import one.lindegaard.MobHunting.compatibility.TownyCompat;
 import one.lindegaard.MobHunting.compatibility.VanishNoPacketCompat;
 import one.lindegaard.MobHunting.compatibility.WorldEditCompat;
@@ -207,13 +200,6 @@ public class MetricsManager {
 			@Override
 			public Map<String, Integer> call() throws Exception {
 				Map<String, Integer> valueMap = new HashMap<>();
-				valueMap.put("BossBarAPI", BossBarAPICompat.isSupported() ? 1 : 0);
-				valueMap.put("TitleAPI", TitleAPICompat.isSupported() ? 1 : 0);
-				valueMap.put("BarAPI", BarAPICompat.isSupported() ? 1 : 0);
-				valueMap.put("TitleManager", TitleManagerCompat.isSupported() ? 1 : 0);
-				valueMap.put("ActionBar", ActionbarCompat.isSupported() ? 1 : 0);
-				valueMap.put("ActionBarAPI", ActionBarAPICompat.isSupported() ? 1 : 0);
-				valueMap.put("ActionAnnouncer", ActionAnnouncerCompat.isSupported() ? 1 : 0);
 				valueMap.put("CMIHolograms", CMICompat.isSupported() ? 1 : 0);
 				return valueMap;
 			}

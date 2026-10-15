@@ -30,14 +30,8 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import one.lindegaard.CustomItemsLib.Core;
 import one.lindegaard.CustomItemsLib.Strings;
 import one.lindegaard.CustomItemsLib.Tools;
-import one.lindegaard.CustomItemsLib.compatibility.ActionAnnouncerCompat;
-import one.lindegaard.CustomItemsLib.compatibility.ActionBarAPICompat;
-import one.lindegaard.CustomItemsLib.compatibility.ActionbarCompat;
-import one.lindegaard.CustomItemsLib.compatibility.BarAPICompat;
-import one.lindegaard.CustomItemsLib.compatibility.BossBarAPICompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMICompat;
 import one.lindegaard.CustomItemsLib.compatibility.CMILibCompat;
-import one.lindegaard.CustomItemsLib.compatibility.TitleManagerCompat;
 import one.lindegaard.CustomItemsLib.messages.MessageType;
 import one.lindegaard.MobHunting.compatibility.CitizensCompat;
 import one.lindegaard.MobHunting.compatibility.PlaceholderAPICompat;
@@ -495,11 +489,7 @@ public class Messages {
 
 		message = Strings.convertColors(PlaceholderAPICompat.setPlaceholders(player, message));
 
-		if (BossBarAPICompat.isSupported()) {
-			BossBarAPICompat.addBar(player, String.format(message, args));
-		} else if (BarAPICompat.isSupported()) {
-			BarAPICompat.setMessageTime(player, String.format(message, args), 5);
-		} else if (CMILibCompat.isSupported()) {
+		if (CMILibCompat.isSupported()) {
 			CMILibCompat.sendBossBarMessage(player, String.format(message, args));
 		} else {
 			player.sendMessage(
@@ -552,15 +542,7 @@ public class Messages {
 		if (isEmpty(message))
 			return;
 		message = PlaceholderAPICompat.setPlaceholders(player, message);
-		if (TitleManagerCompat.isSupported()) {
-			TitleManagerCompat.setActionBar(player, message);
-		} else if (ActionbarCompat.isSupported()) {
-			ActionbarCompat.setMessage(player, message);
-		} else if (ActionAnnouncerCompat.isSupported()) {
-			ActionAnnouncerCompat.setMessage(player, message);
-		} else if (ActionBarAPICompat.isSupported()) {
-			ActionBarAPICompat.setMessage(player, message);
-		} else if (CMILibCompat.isSupported()) {
+		if (CMILibCompat.isSupported()) {
 			CMILibCompat.sendActionBarMessage(player, message);
 		} else {
 			if (!isEmpty(message))
@@ -569,8 +551,7 @@ public class Messages {
 	}
 
 	private boolean isActionBarSupported() {
-		return TitleManagerCompat.isSupported() || ActionbarCompat.isSupported() || ActionAnnouncerCompat.isSupported()
-				|| ActionBarAPICompat.isSupported() || CMILibCompat.isSupported();
+		return CMILibCompat.isSupported();
 	}
 
 	public void playerSendMessage(Player player, String message) {
