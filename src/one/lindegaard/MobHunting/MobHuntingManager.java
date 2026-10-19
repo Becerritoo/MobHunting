@@ -37,6 +37,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -289,26 +290,27 @@ public class MobHuntingManager implements Listener {
 			Entity damager = ((EntityDamageByEntityEvent) lastDamageCause).getDamager();
 			Player killer = null;
 			LivingEntity mob = null;
+			ProjectileSource projectileShooter = getProjectileShooter(damager);
 
 			if (damager instanceof Player)
 				killer = (Player) damager;
-			else if (damager instanceof Projectile && ((Projectile) damager).getShooter() instanceof Player)
-				killer = (Player) ((Projectile) damager).getShooter();
-			else if (damager instanceof Projectile && ((Projectile) damager).getShooter() instanceof LivingEntity)
-				mob = (LivingEntity) ((Projectile) damager).getShooter();
+			else if (projectileShooter instanceof Player)
+				killer = (Player) projectileShooter;
+			else if (projectileShooter instanceof LivingEntity)
+				mob = (LivingEntity) projectileShooter;
 			else if (damager instanceof LivingEntity)
 				mob = (LivingEntity) damager;
 			else if (damager instanceof Projectile) {
-				if (((Projectile) damager).getShooter() != null)
+				if (projectileShooter != null)
 					plugin.getMessages().debug("%s was killed by a %s shot by %s", killed.getName(), damager.getName(),
-							((Projectile) damager).getShooter().toString());
+							describeProjectileShooter(projectileShooter));
 				else
 					plugin.getMessages().debug("%s was killed by a %s", killed.getName(), damager.getName());
 			}
 
 			plugin.getMessages().debug("%s was killed by a %s", killed.getName(), damager.getName());
 			if (damager instanceof Projectile)
-				plugin.getMessages().debug("and shooter was %s", ((Projectile) damager).getShooter().toString());
+				plugin.getMessages().debug("and shooter was %s", describeProjectileShooter(projectileShooter));
 
 			// MobArena
 			if (MobArenaCompat.isPlayingMobArena((Player) killed) && !plugin.getConfigManager().mobarenaGetRewards) {
@@ -361,6 +363,14 @@ public class MobHuntingManager implements Listener {
 				}
 			}
 		}
+	}
+
+	static ProjectileSource getProjectileShooter(Entity damager) {
+		return damager instanceof Projectile ? ((Projectile) damager).getShooter() : null;
+	}
+
+	static String describeProjectileShooter(ProjectileSource shooter) {
+		return shooter == null ? "unknown" : shooter.toString();
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
