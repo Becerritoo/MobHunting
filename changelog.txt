@@ -1,3 +1,8 @@
+V8.7.2 (development)
+* Prevent player-death processing from failing when a projectile has no available shooter.
+* Preserve existing player and mob attribution while reading the projectile shooter only once.
+* Add regression coverage for projectiles with and without a shooter.
+
 V8.7.1 (2026-10-15)
 * Replace the abandoned Spiget updater with verified Hangar release checks and downloads.
 * Select only public, reviewed stable releases compatible with the exact Paper version.
