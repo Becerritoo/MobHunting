@@ -48,6 +48,9 @@ public class ConfigManager extends AutoConfig {
 		setCategoryComment("updates", "########################################################################"
 				+ "\nUpdate settings" + "\n########################################################################");
 
+		setCategoryComment("metrics", "########################################################################"
+				+ "\nAnonymous bStats metrics settings" + "\n########################################################################");
+
 		setCategoryComment("example", "########################################################################"
 				+ "\nExample of a mob configuration of rewards for killing a mob."
 				+ "\n########################################################################"
@@ -4785,6 +4788,9 @@ public class ConfigManager extends AutoConfig {
 	@ConfigField(name = "autoupdate", category = "updates", comment = "Set 'autoupdate: true' if you want new updates downloaded and installed."
 			+ "\nYou will still have to reboot the server manually.")
 	public boolean autoupdate = false;
+
+	@ConfigField(name = "bstats_enabled", category = "metrics", comment = "Allow MobHunting to submit anonymous usage metrics when bStats is also enabled globally.")
+	public boolean bStatsEnabled = true;
 
 	// #####################################################################################
 	// Generel settings

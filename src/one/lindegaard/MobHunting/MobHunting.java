@@ -180,30 +180,6 @@ public class MobHunting extends JavaPlugin {
 		}
 		mConfig.saveConfig();
 
-		if (isbStatsEnabled())
-			getMessages().debug("bStat is enabled");
-		else {
-			Bukkit.getConsoleSender()
-					.sendMessage(PREFIX_WARNING + "=====================WARNING=============================");
-			Bukkit.getConsoleSender()
-					.sendMessage(PREFIX_WARNING + "The statistics collection is disabled. As developer I need the");
-			Bukkit.getConsoleSender()
-					.sendMessage(PREFIX_WARNING + "statistics from bStats.org. The statistics is 100% anonymous.");
-			Bukkit.getConsoleSender().sendMessage(PREFIX_WARNING + "https://bstats.org/plugin/bukkit/MobHunting");
-			Bukkit.getConsoleSender().sendMessage(
-					PREFIX_WARNING + "Please enable this in /plugins/bStats/config.yml and get rid of this");
-			Bukkit.getConsoleSender().sendMessage(PREFIX_WARNING + "message. Loading will continue in 15 sec.");
-			Bukkit.getConsoleSender()
-					.sendMessage(PREFIX_WARNING + "=========================================================");
-			long now = System.currentTimeMillis();
-			while (System.currentTimeMillis() < now + 15000L) {
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-				}
-			}
-		}
-
 		mCompatibilityManager = new CompatibilityManager(this);
 
 		// Handle compatibility stuff
@@ -350,10 +326,11 @@ public class MobHunting extends JavaPlugin {
 		// Check for new MobHunting updates using Hangar.
 		mHangarUpdater.hourlyUpdateCheck(getServer().getConsoleSender(), mConfig.updateCheck, false);
 
-		if (!Servers.isGlowstoneServer()) {
+		if (shouldStartMetrics(mConfig.bStatsEnabled, isBStatsGloballyEnabled(), Servers.isGlowstoneServer())) {
 			mMetricsManager = new MetricsManager(this);
 			mMetricsManager.startBStatsMetrics();
-		}
+		} else
+			getMessages().debug("bStats metrics are disabled.");
 
 		// Handle online players when server admin do a /reload or /mh reload
 		if (Tools.getOnlinePlayersAmount() > 0) {
@@ -411,11 +388,15 @@ public class MobHunting extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(PREFIX + "MobHunting disabled.");
 	}
 
-	private boolean isbStatsEnabled() {
+	private boolean isBStatsGloballyEnabled() {
 		File bStatsFolder = new File(instance.getDataFolder().getParentFile(), "bStats");
 		File configFile = new File(bStatsFolder, "config.yml");
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 		return config.getBoolean("enabled", true);
+	}
+
+	static boolean shouldStartMetrics(boolean pluginEnabled, boolean globallyEnabled, boolean glowstoneServer) {
+		return pluginEnabled && globallyEnabled && !glowstoneServer;
 	}
 
 	// ************************************************************************************
