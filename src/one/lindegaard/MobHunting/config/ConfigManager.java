@@ -2,8 +2,6 @@ package one.lindegaard.MobHunting.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -4832,6 +4830,8 @@ public class ConfigManager extends AutoConfig {
 
 	@ConfigField(name = "backup", category = "general", comment = "Backup config on each server start / reload")
 	public boolean backup = true;
+	@ConfigField(name = "backup_count", category = "general", comment = "Maximum number of rotating config backups to retain (1-100).")
+	public int backupCount = 10;
 
 	@ConfigField(name = "newplayer_learning_mode", category = "general", comment = "When a new playerjoins the server he will by default start"
 			+ "\nin 'LEARNING MODE' and get extra information about when he get rewards and not,"
@@ -4891,24 +4891,18 @@ public class ConfigManager extends AutoConfig {
 	}
 
 	public void backupConfig(File mFile) {
-		File backupFile = new File(mFile.toString());
-		int count = 0;
-		while (backupFile.exists() && count++ < 1000) {
-			backupFile = new File("plugins/MobHunting/backup/" + mFile.getName() + ".bak" + count);
+		if (!mFile.exists())
+			return;
+		try {
+			File backupDirectory = new File(plugin.getDataFolder(), "backup");
+			File backupFile = BackupManager.backup(mFile.toPath(), backupDirectory.toPath(), backupCount).toFile();
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting]" + ChatColor.RESET
+					+ " Config.yml was backed up to " + backupFile.getPath());
+		} catch (IOException e) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting]" + ChatColor.RED
+					+ "[ERROR] - Could not rotate the config.yml backup in the MobHunting backup folder");
+			e.printStackTrace();
 		}
-		if (mFile.exists())
-			try {
-				if (!backupFile.exists())
-					backupFile.mkdirs();
-				Files.copy(mFile.toPath(), backupFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES,
-						StandardCopyOption.REPLACE_EXISTING);
-				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting]" + ChatColor.RESET
-						+ " Config.yml was backed up to " + backupFile.getPath());
-			} catch (IOException e1) {
-				Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MobHunting]" + ChatColor.RED
-						+ "[ERROR] - Could not backup config.yml file to plugins/MobHunting/config.yml. Delete some old backups");
-				e1.printStackTrace();
-			}
 	}
 
 	public static int getConfigVersion(File file) {
