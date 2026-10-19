@@ -47,7 +47,7 @@ public class Messages {
 		exportDefaultLanguages(plugin);
 	}
 
-	private static Map<String, String> mTranslationTable;
+	private static Map<String, String> mTranslationTable = new HashMap<>();
 	private static String[] mValidEncodings = new String[] { "UTF-16", "UTF-16BE", "UTF-16LE", "UTF-8", "ISO646-US" };
 	private static final String PREFIX = ChatColor.GOLD + "[MobHunting]" + ChatColor.RESET;
 	private static String[] sources = new String[] { "en_US.lang", "hu_HU.lang", "zh_CN.lang", "ru_RU.lang",
@@ -357,7 +357,7 @@ public class Messages {
 	}
 
 	private String getStringInternal(String key) {
-		String value = mTranslationTable.get(key);
+		String value = findTranslation(mTranslationTable, key);
 
 		if (value == null) {
 			Bukkit.getServer().getConsoleSender()
@@ -365,7 +365,14 @@ public class Messages {
 			throw new MissingResourceException("", "", key);
 		}
 
-		return value.trim();
+		return value;
+	}
+
+	static String findTranslation(Map<String, String> translations, String key) {
+		if (translations == null)
+			return null;
+		String value = translations.get(key);
+		return value == null ? null : value.trim();
 	}
 
 	private static Pattern mPattern;
