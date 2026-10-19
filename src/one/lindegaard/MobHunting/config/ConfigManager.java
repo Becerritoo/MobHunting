@@ -3674,6 +3674,8 @@ public class ConfigManager extends AutoConfig {
 	// #####################################################################################
 	@ConfigField(name = "enable_grinding_detection", category = "grinding")
 	public boolean grindingDetectionEnabled = true;
+	@ConfigField(name = "history_limit", category = "grinding", comment = "Maximum number of recent kills retained for grinding detection (100-100000).")
+	public int grindingHistoryLimit = 5000;
 	@ConfigField(name = "disable_grinding_detection_in_worlds", category = "grinding", comment = "Put the names of the worlds here where you want to disable grinding detection"
 			+ "\nYou would typically do this in creative worlds.")
 	public String[] disableGrindingDetectionInWorlds = { "worldname", "worldname2" };
