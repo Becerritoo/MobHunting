@@ -29,7 +29,6 @@ import org.bukkit.event.world.WorldUnloadEvent;
 import one.lindegaard.CustomItemsLib.Tools;
 import one.lindegaard.CustomItemsLib.mobs.MobType;
 import one.lindegaard.MobHunting.MobHunting;
-import one.lindegaard.MobHunting.mobs.ExtendedMob;
 
 public class GrindingManager implements Listener {
 
@@ -114,11 +113,9 @@ public class GrindingManager implements Listener {
 		long averageKillTime = timeframe / kills;
 		int requiredKills = Math.max(1, plugin.getConfigManager().speedGrindingNoOfMobs);
 		double configuredTimeframe = Math.max(0.0, plugin.getConfigManager().speedGrindingTimeFrame);
-		ExtendedMob mob = plugin.getExtendedMobManager().getExtendedMobFromEntity(killed);
-		String mobName = mob == null ? killed.getType().name() : mob.getMobName();
 		plugin.getMessages().debug(
-				"%s has killed %s %s in %s seconds. Avg.kill time %s must greater than %s when %s mobs is killed.",
-				killer.getName(), kills, mobName, timeframe, averageKillTime,
+				"%s has killed %s mobs in %s seconds. Avg.kill time %s must greater than %s when %s mobs is killed.",
+				killer.getName(), kills, timeframe, averageKillTime,
 				configuredTimeframe / requiredKills, requiredKills);
 		return averageKillTime != 0 && kills >= requiredKills
 				&& averageKillTime < configuredTimeframe / requiredKills;
