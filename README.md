@@ -10,11 +10,11 @@ This fork is maintained by [Becerritoo](https://github.com/Becerritoo) and conti
 work originally created by Rocologo. It focuses on current Paper releases, reliability and
 compatibility with the plugins in the MobHunting ecosystem.
 
-The current development release is `8.8.0-SNAPSHOT`, targeting Paper 1.21.11. Plugin releases follow
+The current release is `8.8.0`, targeting Paper 1.21.11. Plugin releases follow
 [Semantic Versioning](https://semver.org/); the MobHunting version does not mirror the
 Minecraft or Paper version.
 
-Version `8.8.0-SNAPSHOT` improves grinding-history safety, rotates configuration
+Version `8.8.0` improves grinding-history safety, rotates configuration
 backups, hardens translation startup and makes bStats collection non-blocking.
 
 See [changelog.txt](changelog.txt) for the complete history and
@@ -59,7 +59,7 @@ You should also look at following recommended plugins:
 * MasterMobHunters (Citizens2) and Signs
 * Leaderboards
 * Mob grinder detection
-* Versions 8.7.0 and 8.7.1 validated on Paper 1.21.11; 8.8.0 validation is in progress.
+* Versions 8.7.0, 8.7.1 and 8.8.0 validated on Paper 1.21.11.
 * Heavily customizable
 * Language support
 * Tested on SpigotMC, CraftBukkit, PaperSpigot/PaperClip

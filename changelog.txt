@@ -1,10 +1,12 @@
-V8.8.0 (development)
+V8.8.0 (2026-10-22)
 * Store bounded grinding snapshots instead of retaining Bukkit entities and worlds.
 * Synchronize grinding history access, purge expired records and guard empty calculations.
 * Rotate a configurable number of config.yml backups using safe temporary copies.
 * Initialize translations defensively during early startup.
 * Add a plugin-level bStats switch and remove the 15-second startup delay when metrics are disabled.
 * Include the shooterless-projectile player-death fix prepared for 8.7.2.
+* Clarify that speed-grinding diagnostics count all mobs rather than one species.
+* Validate rewards, speed grinding, area penalties, backups and companion-plugin behavior on Paper 1.21.11.
 
 V8.7.2 (development)
 * Prevent player-death processing from failing when a projectile has no available shooter.
